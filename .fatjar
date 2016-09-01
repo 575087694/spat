@@ -1,0 +1,14 @@
+#Fat Jar Configuration File
+#Wed Aug 24 14:52:02 CST 2016
+onejar.license.required=false
+manifest.classpath=
+manifest.removesigners=true
+onejar.checkbox=true
+jarname=C\:\\Users\\liu\\Desktop\\spat_fat.jar
+manifest.mergeall=true
+manifest.mainclass=spat.RunUI
+manifest.file=<createnew>
+jarname.isextern=true
+onejar.expand=
+excludes=
+includes=
