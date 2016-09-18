@@ -8,11 +8,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -33,12 +38,21 @@ import javax.swing.UIManager;
 import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.OceanTheme;
 
-public class RunUI implements Data {
-	private static int winWidth = 900;
-	private static int winHeight = 720;
-	final static JTextArea textArea = new JTextArea();
-	static Connection dbconn = null;
+import tools.Data;
+import tools.MyChart;
+import tools.UtilTools;
 
+public class RunUI implements Data {
+	private final int winWidth = 900;
+	private final int winHeight = 720;
+	final JTextArea textArea = new JTextArea();
+	Connection dbconn = null;
+
+	List<Date> lastDate = new ArrayList<Date>();
+	List<Date> nowDate = new ArrayList<Date>();
+	List<Double> lastData = new ArrayList<Double>();
+	List<Double> nowData = new ArrayList<Double>();
+	
 	public RunUI() {
 		JFrame frame = new JFrame("交易系统日志分析工具");
 		JPanel panelContainer = new JPanel();
@@ -86,6 +100,9 @@ public class RunUI implements Data {
 		typePanel.add(typeButton[0]);
 		typePanel.add(typeButton[1]);
 		typePanel.add(typeButton[2]);
+		JButton chartButton = new JButton("画图");
+		chartButton.setBounds(725, 25, 100, winHeight / 20);
+		typePanel.add(chartButton);
 		panelTop.add(typePanel);
 
 		// 数据库配置栏
@@ -273,7 +290,7 @@ public class RunUI implements Data {
 		// 确定按钮
 		confButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				dbconn = createConnection(dbText0.getText(), dataButton[0].isSelected(), dbText1.getText());
+				dbconn = UtilTools.createConnection(dbText0.getText(), dataButton[0].isSelected(), dbText1.getText());
 			}
 		});
 
@@ -281,7 +298,7 @@ public class RunUI implements Data {
 		startButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				long aa = System.currentTimeMillis();
-				dbconn = createConnection(dbText0.getText(), dataButton[0].isSelected(), dbText1.getText());
+				dbconn = UtilTools.createConnection(dbText0.getText(), dataButton[0].isSelected(), dbText1.getText());
 				String filepath = dirText.getText();
 				String filter = filekeyBox.getSelectedItem().toString();
 				if (typeButton[0].isSelected()) {
@@ -314,17 +331,37 @@ public class RunUI implements Data {
 					Statement stmt = dbconn.createStatement();
 					ResultSet rs = stmt.executeQuery(sql);
 					ResultSetMetaData rsmd = rs.getMetaData();
+					
+					boolean flag = false;
+					lastDate.clear();
+					lastData.clear();
+					lastDate.addAll(nowDate);
+					lastData.addAll(nowData);
+					nowDate.clear();
+					nowData.clear();
+					DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:00");
+					if (rsmd.getColumnTypeName(2).indexOf("INT") != -1) {
+						flag = true;
+					}
+					
 					while (rs.next()) {
 						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 							textArea.append(rsmd.getColumnName(i) + ":" + rs.getString(rsmd.getColumnName(i)) + "    ");
 						}
 						textArea.append("\n");
+						
+						if (flag) {
+							nowDate.add(sdf.parse(rs.getString(rsmd.getColumnName(1))));
+							nowData.add(Double.parseDouble(rs.getString(rsmd.getColumnName(2))));
+						}
 					}
 					textArea.append("\n");
 					rs.close();
 					stmt.close();
 				} catch (SQLException e) {
 					textArea.append("查询语句错误!\n\n");
+					e.printStackTrace();
+				} catch (ParseException e){
 					e.printStackTrace();
 				}
 			}
@@ -334,6 +371,20 @@ public class RunUI implements Data {
 		item.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				textArea.setText(HELPINFO);
+			}
+		});
+		
+		//制图
+		chartButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				MyChart chart = new MyChart();
+				if(!lastDate.isEmpty()&& !lastData.isEmpty()){
+					chart.add(lastDate, lastData);	
+				}
+				if(!nowDate.isEmpty()&& !nowData.isEmpty()){
+					chart.add(nowDate, nowData);	
+				}
+				chart.DisplayChart();
 			}
 		});
 
@@ -350,33 +401,6 @@ public class RunUI implements Data {
 		for (int i = 0; i < list.length; i++) {
 			combobox.addItem(list[i]);
 		}
-	}
-
-	// 创建数据库连接
-	public static Connection createConnection(String dbname, boolean type, String path) {
-		Connection conn = null;
-		String JDBC_URL = "";
-		String USER = "mclogger";
-		String PASSWORD = "123456";
-		String DRIVER_CLASS = "org.h2.Driver";
-		try {
-			if (dbname == null || dbname.trim().length() <= 0) {
-				dbname = "test";
-			}
-			if (path == null || path.trim().length() <= 0) {
-				path = ".";
-			}
-			if (type == true) {
-				JDBC_URL = "jdbc:h2:mem:" + dbname;
-			} else {
-				JDBC_URL = "jdbc:h2:file:" + path + "\\" + dbname;
-			}
-			Class.forName(DRIVER_CLASS);
-			conn = DriverManager.getConnection(JDBC_URL, USER, PASSWORD);
-		} catch (Exception e) {
-			textArea.append("数据库连接失败！\n\n");
-		}
-		return conn;
 	}
 
 	// 程序入口

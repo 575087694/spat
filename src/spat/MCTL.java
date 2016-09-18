@@ -10,12 +10,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JTextArea;
+
+import tools.Data;
+import tools.UtilTools;
 
 public class MCTL implements Data{
 	int count = 0; // SQL计数
@@ -46,43 +46,6 @@ public class MCTL implements Data{
 		this.filepath = filepath;
 		this.filter = filter;
 		this.textArea = textArea;
-	}
-
-	// 计算2个时间的差值
-	public static long compTimeDiff(String starttime, String endtime) {
-		if (starttime.length() <= 0 || endtime.length() <= 0) {
-			return 0;
-		}
-		long diff = -1;
-		long time = -1;
-		try {
-			time = new Long(endtime.substring(23, 26)) - new Long(starttime.substring(23, 26));
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-
-			Date begin = df.parse(starttime.substring(0, 23));
-			Date end = df.parse(endtime.substring(0, 23));
-			diff = end.getTime() - begin.getTime();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return diff * 1000 + time;
-	}
-
-	// 扫描指定目录下的所有文件
-	public static void getFiles(ArrayList<String> filelist, ArrayList<String> subdirlist, String filePath,
-			String fileKey) {
-		File root = new File(filePath);
-		File[] files = root.listFiles();
-		for (File file : files) {
-			if (file.isDirectory()) {
-				getFiles(filelist, subdirlist, file.getAbsolutePath(), fileKey);
-				subdirlist.add(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
-			} else {
-				String strFileName = file.getAbsolutePath();
-				if (strFileName.indexOf(fileKey) >= 0)
-					filelist.add(strFileName);
-			}
-		}
 	}
 
 	// 获取报文类型
@@ -183,7 +146,7 @@ public class MCTL implements Data{
 	}
 
 	// 初始化表
-	public static void initMCTLTab(Connection conn) {
+	public void initMCTLTab(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("DROP TABLE IF EXISTS TABMCTL");
@@ -233,9 +196,9 @@ public class MCTL implements Data{
 		getMsgDealSTime();
 		getMsgDealETime();
 		getProcErrMsg();
-		mctlmap.msgmqwaittime = compTimeDiff(mctlmap.mqputtime, mctlmap.mqrecvtime);
-		mctlmap.msgwaittime = compTimeDiff(mctlmap.mqrecvtime, mctlmap.msgdealstime);
-		mctlmap.msgdealtime = compTimeDiff(mctlmap.msgdealstime, mctlmap.msgdealetime);
+		mctlmap.msgmqwaittime = UtilTools.compTimeDiff(mctlmap.mqputtime, mctlmap.mqrecvtime);
+		mctlmap.msgwaittime = UtilTools.compTimeDiff(mctlmap.mqrecvtime, mctlmap.msgdealstime);
+		mctlmap.msgdealtime = UtilTools.compTimeDiff(mctlmap.msgdealstime, mctlmap.msgdealetime);
 		insertDataBase();
 	}
 
@@ -243,7 +206,7 @@ public class MCTL implements Data{
 	public void runMainMethod() {
 		ArrayList<String> filelist = new ArrayList<String>();
 		ArrayList<String> sdirlist = new ArrayList<String>();
-		getFiles(filelist, sdirlist, filepath, filter);
+		UtilTools.getFiles(filelist, sdirlist, filepath, filter);
 		initMCTLTab(dbconn);
 		try {
 			boolean sign = false;

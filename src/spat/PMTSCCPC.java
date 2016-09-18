@@ -10,12 +10,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import javax.swing.JTextArea;
+
+import tools.Data;
+import tools.UtilTools;
 
 public class PMTSCCPC implements Data{
 	int count = 0; // SQL计数
@@ -53,46 +53,6 @@ public class PMTSCCPC implements Data{
 			time = time + '0';
 		}
 		return time;
-	}
-
-	// 计算2个时间的差值
-	public static long compTimeDiff(String starttime, String endtime) {
-		if (starttime.length() <= 0 || endtime.length() <= 0) {
-			return 0;
-		}
-		starttime = formatTime(starttime);
-		endtime = formatTime(endtime);
-
-		long diff = -1;
-		long time = -1;
-		try {
-			time = new Long(endtime.substring(23, 26)) - new Long(starttime.substring(23, 26));
-			DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
-
-			Date begin = df.parse(starttime.substring(0, 23));
-			Date end = df.parse(endtime.substring(0, 23));
-			diff = end.getTime() - begin.getTime();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return diff * 1000 + time;
-	}
-
-	// 扫描指定目录下的所有文件
-	public static void getFiles(ArrayList<String> filelist, ArrayList<String> subdirlist, String filePath,
-			String fileKey) {
-		File root = new File(filePath);
-		File[] files = root.listFiles();
-		for (File file : files) {
-			if (file.isDirectory()) {
-				getFiles(filelist, subdirlist, file.getAbsolutePath(), fileKey);
-				subdirlist.add(file.getAbsolutePath().substring(file.getAbsolutePath().lastIndexOf("\\") + 1));
-			} else {
-				String strFileName = file.getAbsolutePath();
-				if (strFileName.indexOf(fileKey) >= 0)
-					filelist.add(strFileName);
-			}
-		}
 	}
 
 	// 获取进程号
@@ -162,16 +122,16 @@ public class PMTSCCPC implements Data{
 
 	public void getMsgDealTime() {
 		if (pmtsccpcmap.msgdirection.equals("D")) {
-			pmtsccpcmap.msgfwtime = compTimeDiff(pmtsccpcmap.premsgsendtime, pmtsccpcmap.msgsendtime);
+			pmtsccpcmap.msgfwtime = UtilTools.compTimeDiff(formatTime(pmtsccpcmap.premsgsendtime), formatTime(pmtsccpcmap.msgsendtime));
 			pmtsccpcmap.msgdealtime = 0;
 		} else {
-			pmtsccpcmap.msgdealtime = compTimeDiff(pmtsccpcmap.pmtsurecvtime, pmtsccpcmap.msgsendtime);
+			pmtsccpcmap.msgdealtime = UtilTools.compTimeDiff(formatTime(pmtsccpcmap.pmtsurecvtime), formatTime(pmtsccpcmap.msgsendtime));
 			pmtsccpcmap.msgfwtime = 0;
 		}
 	}
 
 	// 初始化表
-	public static void initPMTSCCPCTab(Connection conn) {
+	public void initPMTSCCPCTab(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("DROP TABLE IF EXISTS TABPMTSCCPC");
@@ -229,7 +189,7 @@ public class PMTSCCPC implements Data{
 	public void runMainMethod() {
 		ArrayList<String> filelist = new ArrayList<String>();
 		ArrayList<String> sdirlist = new ArrayList<String>();
-		getFiles(filelist, sdirlist, filepath, filter);
+		UtilTools.getFiles(filelist, sdirlist, filepath, filter);
 		initPMTSCCPCTab(dbconn);
 		try {
 			boolean sign = false;
