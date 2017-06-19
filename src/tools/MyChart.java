@@ -18,7 +18,7 @@ public class MyChart{
 	int i = 0;
 	
 	public MyChart(){
-		chart = new XYChartBuilder().width(800).height(600).xAxisTitle("X").yAxisTitle("Y").title("ÇúÏßÍ¼")
+		chart = new XYChartBuilder().width(800).height(600).xAxisTitle("X").yAxisTitle("Y").title("æ›²çº¿å›¾")
 				.build();
 		chart.getStyler().setLegendVisible(true);
 		chart.getStyler().setLegendPosition(LegendPosition.InsideNW);
@@ -26,7 +26,7 @@ public class MyChart{
 
 	public void add(List<Date> date, List<Double> Data){
 		i++;
-		chart.addSeries("Í¼"+i, date, Data).setMarker(SeriesMarkers.NONE);
+		chart.addSeries("å›¾"+i, date, Data).setMarker(SeriesMarkers.NONE);
 	}
 	
 	public void DisplayChart(){

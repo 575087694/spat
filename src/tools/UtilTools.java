@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class UtilTools {
 	
-	// ¼ÆËã2¸öÊ±¼äµÄ²îÖµ
+	// è®¡ç®—2ä¸ªæ—¶é—´çš„å·®å€¼
 	public static long compTimeDiff(String starttime, String endtime) {
 		if (starttime.length() <= 0 || endtime.length() <= 0) {
 			return 0;
@@ -30,7 +30,7 @@ public class UtilTools {
 		return diff * 1000 + time;
 	}
 
-	// É¨ÃèÖ¸¶¨Ä¿Â¼ÏÂµÄËùÓĞÎÄ¼ş
+	// æ‰«ææŒ‡å®šç›®å½•ä¸‹çš„æ‰€æœ‰æ–‡ä»¶
 	public static void getFiles(ArrayList<String> filelist, ArrayList<String> subdirlist, String filePath,
 			String fileKey) {
 		File root = new File(filePath);
@@ -47,7 +47,7 @@ public class UtilTools {
 		}
 	}
 	
-	// ´´½¨Êı¾İ¿âÁ¬½Ó
+	// åˆ›å»ºæ•°æ®åº“è¿æ¥
 	public static Connection createConnection(String dbname, boolean type, String path) {
 		Connection conn = null;
 		String JDBC_URL = "";

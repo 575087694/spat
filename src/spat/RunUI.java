@@ -54,18 +54,18 @@ public class RunUI implements Data {
 	List<Double> nowData = new ArrayList<Double>();
 	
 	public RunUI() {
-		JFrame frame = new JFrame("½»Ò×ÏµÍ³ÈÕÖ¾·ÖÎö¹¤¾ß");
+		JFrame frame = new JFrame("äº¤æ˜“ç³»ç»Ÿæ—¥å¿—åˆ†æå·¥å…·");
 		JPanel panelContainer = new JPanel();
 		panelContainer.setLayout(new GridLayout(0, 1));
 
-		// ²Ëµ¥À¸
+		// èœå•æ 
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setOpaque(true);
-		JMenu hitsMenu = new JMenu("°ïÖú");
-		JMenuItem item = new JMenuItem("Ê¹ÓÃËµÃ÷");
+		JMenu hitsMenu = new JMenu("å¸®åŠ©");
+		JMenuItem item = new JMenuItem("ä½¿ç”¨è¯´æ˜");
 		hitsMenu.add(item);
 		menuBar.add(hitsMenu);
-		hitsMenu.setToolTipText("²é¿´Ê¹ÓÃËµÃ÷");
+		hitsMenu.setToolTipText("æŸ¥çœ‹ä½¿ç”¨è¯´æ˜");
 		hitsMenu.setMnemonic(KeyEvent.VK_H);
 		frame.setJMenuBar(menuBar);
 
@@ -76,16 +76,16 @@ public class RunUI implements Data {
 		panelContainer.add(panelTop);
 		panelContainer.add(panelBottom);
 
-		// ·ÖÎöÀà±ğÀ¸
+		// åˆ†æç±»åˆ«æ 
 		JPanel typePanel = new JPanel();
 		typePanel.setLayout(null);
-		typePanel.setBorder(BorderFactory.createTitledBorder("ÈÕÖ¾ÀàĞÍÉèÖÃ"));
+		typePanel.setBorder(BorderFactory.createTitledBorder("æ—¥å¿—ç±»å‹è®¾ç½®"));
 		typePanel.setSize(winWidth, winHeight / 6);
 		typePanel.setBounds(0, 0, winWidth - 20, winHeight / 7);
 		final JRadioButton[] typeButton = new JRadioButton[3];
-		typeButton[0] = new JRadioButton("MCTLÈÕÖ¾", true);
-		typeButton[1] = new JRadioButton("PMTSNPCÈÕÖ¾");
-		typeButton[2] = new JRadioButton("PMTSCCPCÈÕÖ¾");
+		typeButton[0] = new JRadioButton("MCTLæ—¥å¿—", true);
+		typeButton[1] = new JRadioButton("PMTSNPCæ—¥å¿—");
+		typeButton[2] = new JRadioButton("PMTSCCPCæ—¥å¿—");
 		ButtonGroup buttonGroup = new ButtonGroup();
 		buttonGroup.add(typeButton[0]);
 		buttonGroup.add(typeButton[1]);
@@ -100,15 +100,15 @@ public class RunUI implements Data {
 		typePanel.add(typeButton[0]);
 		typePanel.add(typeButton[1]);
 		typePanel.add(typeButton[2]);
-		JButton chartButton = new JButton("»­Í¼");
+		JButton chartButton = new JButton("ç”»å›¾");
 		chartButton.setBounds(725, 25, 100, winHeight / 20);
 		typePanel.add(chartButton);
 		panelTop.add(typePanel);
 
-		// Êı¾İ¿âÅäÖÃÀ¸
+		// æ•°æ®åº“é…ç½®æ 
 		JPanel databasePanel = new JPanel();
 		databasePanel.setLayout(null);
-		databasePanel.setBorder(BorderFactory.createTitledBorder("Êı¾İ¿â±£´æ·½Ê½"));
+		databasePanel.setBorder(BorderFactory.createTitledBorder("æ•°æ®åº“ä¿å­˜æ–¹å¼"));
 		databasePanel.setSize(winWidth, winHeight / 6);
 		databasePanel.setBounds(0, 0, winWidth - 20, winHeight / 7);
 		final JRadioButton[] dataButton = new JRadioButton[3];
@@ -126,17 +126,17 @@ public class RunUI implements Data {
 		publicPanel.setLayout(null);
 		publicPanel.setSize(winWidth - 240, winHeight / 12);
 		publicPanel.setBounds(200, 15, winWidth - 240, winHeight / 12);
-		JLabel dbLabel0 = new JLabel("Êı¾İ¿âÃû:");
+		JLabel dbLabel0 = new JLabel("æ•°æ®åº“å:");
 		dbLabel0.setBounds(35, 0, 60, winHeight / 12);
 		JTextField dbText0 = new JTextField("");
 		dbText0.setBounds(95, 10, 60, winHeight / 20);
-		JLabel dbLabel = new JLabel("±¾µØÊı¾İ¿âÄ¿Â¼:");
+		JLabel dbLabel = new JLabel("æœ¬åœ°æ•°æ®åº“ç›®å½•:");
 		dbLabel.setBounds(200, 0, 90, winHeight / 12);
 		JTextField dbText1 = new JTextField("");
 		dbText1.setBounds(300, 10, 115, winHeight / 20);
 		JButton dbButton = new JButton("...");
 		dbButton.setBounds(425, 10, 50, winHeight / 20);
-		JButton confButton = new JButton("Á¬½ÓÊı¾İ¿â");
+		JButton confButton = new JButton("è¿æ¥æ•°æ®åº“");
 		confButton.setBounds(525, 10, 100, winHeight / 20);
 		publicPanel.add(dbLabel0);
 		publicPanel.add(dbText0);
@@ -151,24 +151,24 @@ public class RunUI implements Data {
 		panelTop.add(databasePanel);
 		panelTop.add(databasePanel);
 
-		// Ñ¡ÔñÄ¿Â¼À¸
+		// é€‰æ‹©ç›®å½•æ 
 		JPanel timePanel = new JPanel();
-		timePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("ÈÕÖ¾ÅäÖÃ"));
+		timePanel.setBorder(javax.swing.BorderFactory.createTitledBorder("æ—¥å¿—é…ç½®"));
 		timePanel.setBounds(0, winHeight / 6 + 5, winWidth - 20, winHeight / 6);//
 		timePanel.setLayout(null);
-		JLabel dirLabel = new JLabel("ÈÕÖ¾Ä¿Â¼:");
+		JLabel dirLabel = new JLabel("æ—¥å¿—ç›®å½•:");
 		dirLabel.setBounds(15, 15, winWidth / 3 + 40, winHeight / 12);
 		JTextField dirText = new JTextField("");
 		dirText.setBounds(75, 25, winWidth / 3, winHeight / 20);
 		JButton dirButton = new JButton("...");
 		dirButton.setBounds(385, 25, 50, winHeight / 20);
-		JLabel filekeyLabel = new JLabel("ÎÄ¼ş¹Ø¼ü×Ö:");
+		JLabel filekeyLabel = new JLabel("æ–‡ä»¶å…³é”®å­—:");
 		filekeyLabel.setBounds(465, 15, winWidth / 3 + 40, winHeight / 12);
 		JComboBox<String> filekeyBox = new JComboBox<String>();
 		filekeyBox.setEditable(true);
 		filekeyBox.setBounds(535, 25, 150, winHeight / 20);
 		changeView(filekeyBox, MCTLFILTER);
-		JButton startButton = new JButton("Æô¶¯·ÖÎö");
+		JButton startButton = new JButton("å¯åŠ¨åˆ†æ");
 		startButton.setBounds(725, 25, 100, winHeight / 20);
 		timePanel.add(dirLabel);
 		timePanel.add(dirText);
@@ -178,18 +178,18 @@ public class RunUI implements Data {
 		timePanel.add(filekeyLabel);
 		panelTop.add(timePanel);
 
-		// SQLÉèÖÃÀ¸
+		// SQLè®¾ç½®æ 
 		JPanel sqlPanel = new JPanel();
-		sqlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("SQLÉèÖÃ"));
+		sqlPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("SQLè®¾ç½®"));
 		sqlPanel.setLayout(null);
 		sqlPanel.setBounds(0, winHeight / 6 + 5, winWidth - 20, winHeight / 6);
-		JLabel sqlLabel = new JLabel("SQLÓï¾ä:");
+		JLabel sqlLabel = new JLabel("SQLè¯­å¥:");
 		sqlLabel.setBounds(15, 25, 100, winHeight / 20);
 		JComboBox<String> sqlText = new JComboBox<String>();
 		sqlText.setEditable(true);
 		changeView(sqlText, MCTLSQL);
 		sqlText.setBounds(70, 25, 615, winHeight / 20);
-		JButton sqlButton = new JButton("Ö´ĞĞSQL");
+		JButton sqlButton = new JButton("æ‰§è¡ŒSQL");
 		sqlButton.setBounds(725, 25, 100, winHeight / 20);
 		timePanel.add(sqlButton);
 		sqlPanel.add(sqlLabel);
@@ -197,25 +197,25 @@ public class RunUI implements Data {
 		sqlPanel.add(sqlButton);
 		panelTop.add(sqlPanel);
 
-		// Êä³ö´°¿ÚÀ¸
+		// è¾“å‡ºçª—å£æ 
 		JPanel ioPanel = new JPanel();
-		ioPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Êä³ö´°¿Ú"));
+		ioPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("è¾“å‡ºçª—å£"));
 		ioPanel.setBounds(0, 2 * (winHeight / 6) + 85, winWidth - 20, winHeight / 3 + 10);//
 		ioPanel.setLayout(new GridLayout(1, 1));
 		textArea.setBounds(0, 5, winWidth - 20, winHeight / 3 - 20);
 		ioPanel.add(textArea);
 		JScrollPane scroll = new JScrollPane(textArea);
-		// ·Ö±ğÉèÖÃË®Æ½ºÍ´¹Ö±¹ö¶¯Ìõ×ÜÊÇ³öÏÖ
+		// åˆ†åˆ«è®¾ç½®æ°´å¹³å’Œå‚ç›´æ»šåŠ¨æ¡æ€»æ˜¯å‡ºç°
 		scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		ioPanel.add(scroll);
 		panelBottom.add(ioPanel);
 
-		// Ñ¡Ôñ±¾µØÊı¾İ¿âÎÄ¼ş°´Å¥
+		// é€‰æ‹©æœ¬åœ°æ•°æ®åº“æ–‡ä»¶æŒ‰é’®
 		dbButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				JFileChooser fc = new JFileChooser(new File("./"));// ÉèÖÃÄ¬ÈÏ´ò¿ªµ±Ç°Â·¾¶
-				fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);// ¿ÉÒÔÑ¡ÔñÄ¿Â¼ºÍÎÄ¼ş
+				JFileChooser fc = new JFileChooser(new File("./"));// è®¾ç½®é»˜è®¤æ‰“å¼€å½“å‰è·¯å¾„
+				fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);// å¯ä»¥é€‰æ‹©ç›®å½•å’Œæ–‡ä»¶
 				int flag = fc.showOpenDialog(null);
 				if (flag == JFileChooser.APPROVE_OPTION) {
 					File f = fc.getSelectedFile();
@@ -235,13 +235,13 @@ public class RunUI implements Data {
 							}
 						}
 					} else {
-						textArea.append("Î´Öª´íÎó£¡\n");
+						textArea.append("æœªçŸ¥é”™è¯¯ï¼\n");
 					}
 				}
 			}
 		});
 
-		// ÈÕÖ¾ÀàĞÍÑ¡Ôñ°´Å¥
+		// æ—¥å¿—ç±»å‹é€‰æ‹©æŒ‰é’®
 		typeButton[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				changeView(filekeyBox, MCTLFILTER);
@@ -261,7 +261,7 @@ public class RunUI implements Data {
 			}
 		});
 
-		// Êı¾İ¿â±£´æ·½Ê½°´Å¥(µã»÷ÏÔÊ¾Òş²ØµÄÑ¡Ïî)
+		// æ•°æ®åº“ä¿å­˜æ–¹å¼æŒ‰é’®(ç‚¹å‡»æ˜¾ç¤ºéšè—çš„é€‰é¡¹)
 		dataButton[0].addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				publicPanel.setVisible(false);
@@ -273,11 +273,11 @@ public class RunUI implements Data {
 			}
 		});
 
-		// Ñ¡ÔñÈÕÖ¾Ä¿Â¼°´Å¥
+		// é€‰æ‹©æ—¥å¿—ç›®å½•æŒ‰é’®
 		dirButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				JFileChooser fc = new JFileChooser(new File("./"));// ÉèÖÃÄ¬ÈÏ´ò¿ªµ±Ç°Â·¾¶
-				fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);// Ö»ÄÜÑ¡ÔñÄ¿Â¼
+				JFileChooser fc = new JFileChooser(new File("./"));// è®¾ç½®é»˜è®¤æ‰“å¼€å½“å‰è·¯å¾„
+				fc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);// åªèƒ½é€‰æ‹©ç›®å½•
 				int flag = fc.showOpenDialog(null);
 				if (flag == JFileChooser.APPROVE_OPTION) {
 					File f = fc.getSelectedFile();
@@ -287,14 +287,14 @@ public class RunUI implements Data {
 			}
 		});
 
-		// È·¶¨°´Å¥
+		// ç¡®å®šæŒ‰é’®
 		confButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				dbconn = UtilTools.createConnection(dbText0.getText(), dataButton[0].isSelected(), dbText1.getText());
 			}
 		});
 
-		// ·ÖÎöÈÕÖ¾°´Å¥
+		// åˆ†ææ—¥å¿—æŒ‰é’®
 		startButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				long aa = System.currentTimeMillis();
@@ -315,11 +315,11 @@ public class RunUI implements Data {
 				}
 				long bb = System.currentTimeMillis();
 				System.out.println(bb - aa);
-				textArea.append("ÈÕÖ¾·ÖÎöÍê±Ï\n");
+				textArea.append("æ—¥å¿—åˆ†æå®Œæ¯•\n");
 			}
 		});
 
-		// Ö´ĞĞsqlÓï¾ä°´Å¥
+		// æ‰§è¡Œsqlè¯­å¥æŒ‰é’®
 		sqlButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				try {
@@ -359,7 +359,7 @@ public class RunUI implements Data {
 					rs.close();
 					stmt.close();
 				} catch (SQLException e) {
-					textArea.append("²éÑ¯Óï¾ä´íÎó!\n\n");
+					textArea.append("æŸ¥è¯¢è¯­å¥é”™è¯¯!\n\n");
 					e.printStackTrace();
 				} catch (ParseException e){
 					e.printStackTrace();
@@ -367,14 +367,14 @@ public class RunUI implements Data {
 			}
 		});
 
-		// °ïÖúĞÅÏ¢
+		// å¸®åŠ©ä¿¡æ¯
 		item.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				textArea.setText(HELPINFO);
 			}
 		});
 		
-		//ÖÆÍ¼
+		//åˆ¶å›¾
 		chartButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MyChart chart = new MyChart();
@@ -392,10 +392,10 @@ public class RunUI implements Data {
 		frame.setSize(new Dimension(winWidth, winHeight));
 		frame.setContentPane(panelContainer);
 		frame.setVisible(true);
-		frame.setLocationRelativeTo(null);// ÉèÖÃ´°¿ÚÔÚ×ÀÃæÉÏ¾ÓÖĞ
+		frame.setLocationRelativeTo(null);// è®¾ç½®çª—å£åœ¨æ¡Œé¢ä¸Šå±…ä¸­
 	}
 
-	// ÏÔÊ¾sqlÓï¾ä
+	// æ˜¾ç¤ºsqlè¯­å¥
 	public static void changeView(JComboBox<String> combobox, String[] list) {
 		combobox.removeAllItems();
 		for (int i = 0; i < list.length; i++) {
@@ -403,7 +403,7 @@ public class RunUI implements Data {
 		}
 	}
 
-	// ³ÌĞòÈë¿Ú
+	// ç¨‹åºå…¥å£
 	public static void main(String[] agrs) {
 		try {
 			MetalLookAndFeel.setCurrentTheme(new OceanTheme());

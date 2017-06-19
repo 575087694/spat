@@ -18,27 +18,27 @@ import tools.Data;
 import tools.UtilTools;
 
 public class PMTSCCPC implements Data{
-	int count = 0; // SQL¼ÆÊı
-	String msgblock = new String(); // ÈÕÖ¾¿é
-	String filepath = new String(); // ÈÕÖ¾Ä¿Â¼
-	String filter = new String(); // ÈÕÖ¾¹Ø¼ü×Ö
-	Connection dbconn; // Êı¾İ¿âÁ¬½Ó³Ø
-	PreparedStatement ps; // Ô¤´¦ÀíSQL
-	JTextArea textArea = null; // Êä³ö¿ò
-	PMTSCCPCMAP pmtsccpcmap = new PMTSCCPCMAP(); // ÈÕÖ¾·ÖÎö½á¹û
+	int count = 0; // SQLè®¡æ•°
+	String msgblock = new String(); // æ—¥å¿—å—
+	String filepath = new String(); // æ—¥å¿—ç›®å½•
+	String filter = new String(); // æ—¥å¿—å…³é”®å­—
+	Connection dbconn; // æ•°æ®åº“è¿æ¥æ± 
+	PreparedStatement ps; // é¢„å¤„ç†SQL
+	JTextArea textArea = null; // è¾“å‡ºæ¡†
+	PMTSCCPCMAP pmtsccpcmap = new PMTSCCPCMAP(); // æ—¥å¿—åˆ†æç»“æœ
 
 	class PMTSCCPCMAP {
-		String msgtype;// ±¨ÎÄÀàĞÍ
-		String pid;// ½ø³ÌºÅ
-		String msgdirection; // ±¨ÎÄ´«Êä·½Ïò
-		String msgsendtime; // ±¨ÎÄµÄ·¢ËÍÊ±¼ä
-		String premsgsendtime; // Ç°Ò»½Úµã·¢ËÍÊ±¼ä
-		String pmtsurecvtime; // NPC¼ÇÂ¼µÄ½ÓÊÕÊ±¼ä(UÍ·)
-		long msgfwtime; // NPC±¨ÎÄ×ª·¢Ê±¼ä
-		long msgdealtime; // NPCÓ¦ÓÃ´¦ÀíÊ±¼ä
+		String msgtype;// æŠ¥æ–‡ç±»å‹
+		String pid;// è¿›ç¨‹å·
+		String msgdirection; // æŠ¥æ–‡ä¼ è¾“æ–¹å‘
+		String msgsendtime; // æŠ¥æ–‡çš„å‘é€æ—¶é—´
+		String premsgsendtime; // å‰ä¸€èŠ‚ç‚¹å‘é€æ—¶é—´
+		String pmtsurecvtime; // NPCè®°å½•çš„æ¥æ”¶æ—¶é—´(Uå¤´)
+		long msgfwtime; // NPCæŠ¥æ–‡è½¬å‘æ—¶é—´
+		long msgdealtime; // NPCåº”ç”¨å¤„ç†æ—¶é—´
 	}
 
-	// ³õÊ¼»¯²ÎÊı
+	// åˆå§‹åŒ–å‚æ•°
 	public PMTSCCPC(Connection dbconn, String filepath, String filter, JTextArea textArea) {
 		this.dbconn = dbconn;
 		this.filepath = filepath;
@@ -46,7 +46,7 @@ public class PMTSCCPC implements Data{
 		this.textArea = textArea;
 	}
 
-	// ¸ñÊ½»¯¾«¶È²»µ½Î¢ÃëµÄÊ±¼ä´®
+	// æ ¼å¼åŒ–ç²¾åº¦ä¸åˆ°å¾®ç§’çš„æ—¶é—´ä¸²
 	public static String formatTime(String time) {
 		int len = time.length();
 		for (int i = 0; i < 26 - len; i++) {
@@ -55,7 +55,7 @@ public class PMTSCCPC implements Data{
 		return time;
 	}
 
-	// »ñÈ¡½ø³ÌºÅ
+	// è·å–è¿›ç¨‹å·
 	public void getPid() {
 		int pos1 = msgblock.indexOf("[", 2);
 		int pos2 = msgblock.indexOf("]", pos1);
@@ -66,7 +66,7 @@ public class PMTSCCPC implements Data{
 		}
 	}
 
-	// »ñÈ¡±¨ÎÄ·¢ËÍÊ±¼ä
+	// è·å–æŠ¥æ–‡å‘é€æ—¶é—´
 	public void getMsgSendTime() {
 		int pos = msgblock.indexOf("[");
 		if (pos != -1) {
@@ -76,7 +76,7 @@ public class PMTSCCPC implements Data{
 		}
 	}
 
-	// »ñÈ¡Ç°Ò»½Úµã·¢ËÍÊ±¼ä
+	// è·å–å‰ä¸€èŠ‚ç‚¹å‘é€æ—¶é—´
 	public void getPreMsgSendTime() {
 		int pos = msgblock.indexOf(PMTSPRENODETIMEFLAG);
 		int pos1 = msgblock.indexOf("[", pos);
@@ -88,7 +88,7 @@ public class PMTSCCPC implements Data{
 		}
 	}
 
-	// »ñÈ¡±¨ÎÄÀàĞÍºÍ±¨ÎÄ´«Êä·½Ïò
+	// è·å–æŠ¥æ–‡ç±»å‹å’ŒæŠ¥æ–‡ä¼ è¾“æ–¹å‘
 	public void getMsgType() {
 		try {
 			int pos = -1;
@@ -99,7 +99,7 @@ public class PMTSCCPC implements Data{
 				pmtsccpcmap.msgtype = msgblock.substring(pos + 58, pos + 78);
 				pmtsccpcmap.msgdirection = msgblock.substring(pos + 119, pos + 120);
 			} else {
-				throw new Exception("±¨ÎÄÍ·²»ÊÇÍøÒø±¨ÎÄÍ·»ò¶ş´ú±¨ÎÄÍ·£¡\n");
+				throw new Exception("æŠ¥æ–‡å¤´ä¸æ˜¯ç½‘é“¶æŠ¥æ–‡å¤´æˆ–äºŒä»£æŠ¥æ–‡å¤´ï¼\n");
 			}
 			pmtsccpcmap.msgtype = pmtsccpcmap.msgtype.trim();
 
@@ -130,7 +130,7 @@ public class PMTSCCPC implements Data{
 		}
 	}
 
-	// ³õÊ¼»¯±í
+	// åˆå§‹åŒ–è¡¨
 	public void initPMTSCCPCTab(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
@@ -143,7 +143,7 @@ public class PMTSCCPC implements Data{
 		}
 	}
 
-	// ½á¹û²åÈëÊı¾İ¿â
+	// ç»“æœæ’å…¥æ•°æ®åº“
 	public void insertDataBase() {
 		try {
 			if (count == 0) {
@@ -166,11 +166,11 @@ public class PMTSCCPC implements Data{
 				count = 0;
 			}
 		} catch (SQLException e) {
-			textArea.append("Êı¾İ²åÈëÊı¾İ¿âÊ§°Ü£¡\n\n");
+			textArea.append("æ•°æ®æ’å…¥æ•°æ®åº“å¤±è´¥ï¼\n\n");
 		}
 	}
 
-	// ½âÎöÈÕÖ¾¿é
+	// è§£ææ—¥å¿—å—
 	public void parseMCTL() {
 		getPid();
 		getMsgSendTime();
@@ -185,7 +185,7 @@ public class PMTSCCPC implements Data{
 		insertDataBase();
 	}
 
-	// Ö÷·½·¨
+	// ä¸»æ–¹æ³•
 	public void runMainMethod() {
 		ArrayList<String> filelist = new ArrayList<String>();
 		ArrayList<String> sdirlist = new ArrayList<String>();
@@ -227,13 +227,13 @@ public class PMTSCCPC implements Data{
 				count = 0;
 			}
 		} catch (SQLException e) {
-			textArea.append("Êı¾İ¿âÁ¬½ÓÊ§°Ü£¡\n\n");
+			textArea.append("æ•°æ®åº“è¿æ¥å¤±è´¥ï¼\n\n");
 		} catch (FileNotFoundException e) {
-			textArea.append("ÎÄ¼şÎ´ÕÒµ½£¡\n\n");
+			textArea.append("æ–‡ä»¶æœªæ‰¾åˆ°ï¼\n\n");
 		} catch (IOException e) {
-			textArea.append("ÎÄ¼ş¶ÁÈ¡´íÎó£¡\n\n");
+			textArea.append("æ–‡ä»¶è¯»å–é”™è¯¯ï¼\n\n");
 		} catch (Exception e) {
-			textArea.append("ÆäËû´íÎó£¡\n\n");
+			textArea.append("å…¶ä»–é”™è¯¯ï¼\n\n");
 			e.printStackTrace();
 		}
 	}

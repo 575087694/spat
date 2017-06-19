@@ -1,47 +1,47 @@
 package tools;
 
 public interface Data {
-	String MCTLSQL1 = "±¨ÎÄ×ÜÊý##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,count(*) as ±¨ÎÄ×ÜÊý,PROCERRMESG as ÒµÎñ´¦ÀíÃèÊö from TABMCTL group by Ê±¼ä¶Î,ÒµÎñ´¦ÀíÃèÊö order by Ê±¼ä¶Î";
-	String MCTLSQL2 = "°´±¨ÎÄÀàÐÍµÄ±¨ÎÄ×Ü±ÊÊý##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,MSGTYPE as ±¨ÎÄÀàÐÍ,count(*) as ±¨ÎÄ×ÜÊý,PROCERRMESG as ÒµÎñ´¦ÀíÃèÊö from TABMCTL group by Ê±¼ä¶Î,±¨ÎÄÀàÐÍ,ÒµÎñ´¦ÀíÃèÊö order by Ê±¼ä¶Î";
-	String MCTLSQL3 = "µ¥Î»Ê±¼äÄÚÔËÐÐ½ø³ÌÊý##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,count(distinct(PID)) as ½ø³ÌÊý from TABMCTL group by Ê±¼ä¶Î order by Ê±¼ä¶Î";
-	String MCTLSQL4 = "µ¥Î»Ê±¼äÄÚµ¥½ø³Ì´¦Àí×î´ó±¨ÎÄÊý##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,PID as½ø³ÌºÅ,count(*) as ±¨ÎÄ×ÜÊý from TABMCTL group by Ê±¼ä¶Î,PID order by Ê±¼ä¶Î";
-	String MCTLSQL5 = "±¨ÎÄÆ½¾ùµÈ´ý´¦ÀíÊ±¼ä##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,avg(MSGWAITTIME) as Æ½¾ùµÈ´ýÊ±¼ä from TABMCTL group by Ê±¼ä¶Î order by Ê±¼ä¶Î";
-	String MCTLSQL6 = "°´±¨ÎÄÀàÐÍÍ³¼ÆÆ½¾ùµÈ´ý´¦ÀíÊ±¼ä##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,MSGTYPE as ±¨ÎÄÀàÐÍ,avg(MSGWAITTIME) as Æ½¾ùµÈ´ýÊ±¼ä from TABMCTL group by Ê±¼ä¶Î,±¨ÎÄÀàÐÍ order by Ê±¼ä¶Î";
-	String MCTLSQL7 = "±¨ÎÄÆ½¾ù´¦ÀíÊ±¼ä##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,avg(MSGDEALTIME) as Æ½¾ù´¦ÀíÊ±¼ä from TABMCTL group by Ê±¼ä¶Î order by Ê±¼ä¶Î";
-	String MCTLSQL8 = "°´±¨ÎÄÀàÐÍÍ³¼Æ±¨ÎÄÆ½¾ù´¦ÀíÊ±¼ä##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,MSGTYPE as ±¨ÎÄÀàÐÍ,avg(MSGDEALTIME) as Æ½¾ù´¦ÀíÊ±¼ä from TABMCTL group by Ê±¼ä¶Î,±¨ÎÄÀàÐÍ order by Ê±¼ä¶Î";
+	String MCTLSQL1 = "æŠ¥æ–‡æ€»æ•°##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,count(*) as æŠ¥æ–‡æ€»æ•°,PROCERRMESG as ä¸šåŠ¡å¤„ç†æè¿° from TABMCTL group by æ—¶é—´æ®µ,ä¸šåŠ¡å¤„ç†æè¿° order by æ—¶é—´æ®µ";
+	String MCTLSQL2 = "æŒ‰æŠ¥æ–‡ç±»åž‹çš„æŠ¥æ–‡æ€»ç¬”æ•°##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,MSGTYPE as æŠ¥æ–‡ç±»åž‹,count(*) as æŠ¥æ–‡æ€»æ•°,PROCERRMESG as ä¸šåŠ¡å¤„ç†æè¿° from TABMCTL group by æ—¶é—´æ®µ,æŠ¥æ–‡ç±»åž‹,ä¸šåŠ¡å¤„ç†æè¿° order by æ—¶é—´æ®µ";
+	String MCTLSQL3 = "å•ä½æ—¶é—´å†…è¿è¡Œè¿›ç¨‹æ•°##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,count(distinct(PID)) as è¿›ç¨‹æ•° from TABMCTL group by æ—¶é—´æ®µ order by æ—¶é—´æ®µ";
+	String MCTLSQL4 = "å•ä½æ—¶é—´å†…å•è¿›ç¨‹å¤„ç†æœ€å¤§æŠ¥æ–‡æ•°##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,PID asè¿›ç¨‹å·,count(*) as æŠ¥æ–‡æ€»æ•° from TABMCTL group by æ—¶é—´æ®µ,PID order by æ—¶é—´æ®µ";
+	String MCTLSQL5 = "æŠ¥æ–‡å¹³å‡ç­‰å¾…å¤„ç†æ—¶é—´##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,avg(MSGWAITTIME) as å¹³å‡ç­‰å¾…æ—¶é—´ from TABMCTL group by æ—¶é—´æ®µ order by æ—¶é—´æ®µ";
+	String MCTLSQL6 = "æŒ‰æŠ¥æ–‡ç±»åž‹ç»Ÿè®¡å¹³å‡ç­‰å¾…å¤„ç†æ—¶é—´##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,MSGTYPE as æŠ¥æ–‡ç±»åž‹,avg(MSGWAITTIME) as å¹³å‡ç­‰å¾…æ—¶é—´ from TABMCTL group by æ—¶é—´æ®µ,æŠ¥æ–‡ç±»åž‹ order by æ—¶é—´æ®µ";
+	String MCTLSQL7 = "æŠ¥æ–‡å¹³å‡å¤„ç†æ—¶é—´##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,avg(MSGDEALTIME) as å¹³å‡å¤„ç†æ—¶é—´ from TABMCTL group by æ—¶é—´æ®µ order by æ—¶é—´æ®µ";
+	String MCTLSQL8 = "æŒ‰æŠ¥æ–‡ç±»åž‹ç»Ÿè®¡æŠ¥æ–‡å¹³å‡å¤„ç†æ—¶é—´##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,MSGTYPE as æŠ¥æ–‡ç±»åž‹,avg(MSGDEALTIME) as å¹³å‡å¤„ç†æ—¶é—´ from TABMCTL group by æ—¶é—´æ®µ,æŠ¥æ–‡ç±»åž‹ order by æ—¶é—´æ®µ";
 
-	String PMTSNPCSQL1 = "±¨ÎÄ×ÜÊý##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,count(*) as ±¨ÎÄ×ÜÊý from TABPMTSNPC group by Ê±¼ä¶Î order by Ê±¼ä¶Î";
-	String PMTSNPCSQL2 = "°´±¨ÎÄÀàÐÍµÄ±¨ÎÄ×Ü±ÊÊý##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,MSGTYPE as ±¨ÎÄÀàÐÍ,count(*) as ±¨ÎÄ×ÜÊý from TABPMTSNPC group by Ê±¼ä¶Î,MSGTYPE order by Ê±¼ä¶Î";
-	String PMTSNPCSQL3 = "µ¥Î»Ê±¼äÄÚÔËÐÐ½ø³ÌÊý##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,count(distinct(PID)) as ½ø³ÌÊý from TABPMTSNPC group by Ê±¼ä¶Î order by Ê±¼ä¶Î";
-	String PMTSNPCSQL4 = "µ¥Î»Ê±¼äÄÚµ¥½ø³Ì´¦Àí×î´ó±¨ÎÄÊý##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,PID as ½ø³ÌºÅ,count(*) as ±¨ÎÄ×ÜÊý from TABPMTSNPC group by Ê±¼ä¶Î,½ø³ÌºÅ order by Ê±¼ä¶Î";
-	String PMTSNPCSQL5 = "±¨ÎÄÆ½¾ù´¦ÀíÊ±¼ä##select TU.MSGTIME,TU.ÏòÉÏÆ½¾ù´¦ÀíÊ±¼ä,TD.ÏòÏÂÆ½¾ù´¦ÀíÊ±¼ä from (select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGFWTIME) as ÏòÉÏÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSNPC where MSGDIRECTION = 'U' group by MSGTIME)TU,(select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGDEALTIME) as ÏòÏÂÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSNPC where MSGDIRECTION = 'D' group by MSGTIME)TD where TU.MSGTIME = TD.MSGTIME order by MSGTIME";
-	String PMTSNPCSQL6 = "ÏòÉÏ±¨ÎÄÆ½¾ù´¦ÀíÊ±¼ä##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGFWTIME) as ÏòÉÏÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSNPC where MSGDIRECTION = 'U' group by MSGTIME order by MSGTIME";
-	String PMTSNPCSQL7 = "ÏòÏÂ±¨ÎÄÆ½¾ù´¦ÀíÊ±¼ä##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGDEALTIME) as ÏòÏÂÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSNPC where MSGDIRECTION = 'D' group by MSGTIME order by MSGTIME";
-	String PMTSNPCSQL8 = "°´±¨ÎÄÀàÐÍÍ³¼ÆÆ½¾ù´¦ÀíÊ±¼ä##select TU.MSGTIME,TU.MSGTYPE,TU.ÏòÉÏÆ½¾ù´¦ÀíÊ±¼ä,TD.ÏòÏÂÆ½¾ù´¦ÀíÊ±¼ä from (select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGFWTIME) as ÏòÉÏÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSNPC where MSGDIRECTION = 'U' group by MSGTIME,MSGTYPE)TU,(select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGDEALTIME) as ÏòÏÂÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSNPC where MSGDIRECTION = 'D' group by MSGTIME,MSGTYPE)TD where TU.MSGTIME = TD.MSGTIME and TU.MSGTYPE = TD.MSGTYPE order by MSGTIME";
-	String PMTSNPCSQL9 = "°´±¨ÎÄÀàÐÍÍ³¼ÆÏòÉÏ±¨ÎÄÆ½¾ù´¦ÀíÊ±¼ä##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGFWTIME) as ÏòÉÏÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSNPC where MSGDIRECTION = 'U' group by MSGTIME,MSGTYPE order by MSGTIME";
-	String PMTSNPCSQL10 = "°´±¨ÎÄÀàÐÍÍ³¼ÆÏòÏÂ±¨ÎÄÆ½¾ù´¦ÀíÊ±¼ä##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGDEALTIME) as ÏòÏÂÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSNPC where MSGDIRECTION = 'D' group by MSGTIME,MSGTYPE order by MSGTIME";
+	String PMTSNPCSQL1 = "æŠ¥æ–‡æ€»æ•°##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,count(*) as æŠ¥æ–‡æ€»æ•° from TABPMTSNPC group by æ—¶é—´æ®µ order by æ—¶é—´æ®µ";
+	String PMTSNPCSQL2 = "æŒ‰æŠ¥æ–‡ç±»åž‹çš„æŠ¥æ–‡æ€»ç¬”æ•°##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,MSGTYPE as æŠ¥æ–‡ç±»åž‹,count(*) as æŠ¥æ–‡æ€»æ•° from TABPMTSNPC group by æ—¶é—´æ®µ,MSGTYPE order by æ—¶é—´æ®µ";
+	String PMTSNPCSQL3 = "å•ä½æ—¶é—´å†…è¿è¡Œè¿›ç¨‹æ•°##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,count(distinct(PID)) as è¿›ç¨‹æ•° from TABPMTSNPC group by æ—¶é—´æ®µ order by æ—¶é—´æ®µ";
+	String PMTSNPCSQL4 = "å•ä½æ—¶é—´å†…å•è¿›ç¨‹å¤„ç†æœ€å¤§æŠ¥æ–‡æ•°##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,PID as è¿›ç¨‹å·,count(*) as æŠ¥æ–‡æ€»æ•° from TABPMTSNPC group by æ—¶é—´æ®µ,è¿›ç¨‹å· order by æ—¶é—´æ®µ";
+	String PMTSNPCSQL5 = "æŠ¥æ–‡å¹³å‡å¤„ç†æ—¶é—´##select TU.MSGTIME,TU.å‘ä¸Šå¹³å‡å¤„ç†æ—¶é—´,TD.å‘ä¸‹å¹³å‡å¤„ç†æ—¶é—´ from (select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGFWTIME) as å‘ä¸Šå¹³å‡å¤„ç†æ—¶é—´ from TABPMTSNPC where MSGDIRECTION = 'U' group by MSGTIME)TU,(select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGDEALTIME) as å‘ä¸‹å¹³å‡å¤„ç†æ—¶é—´ from TABPMTSNPC where MSGDIRECTION = 'D' group by MSGTIME)TD where TU.MSGTIME = TD.MSGTIME order by MSGTIME";
+	String PMTSNPCSQL6 = "å‘ä¸ŠæŠ¥æ–‡å¹³å‡å¤„ç†æ—¶é—´##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGFWTIME) as å‘ä¸Šå¹³å‡å¤„ç†æ—¶é—´ from TABPMTSNPC where MSGDIRECTION = 'U' group by MSGTIME order by MSGTIME";
+	String PMTSNPCSQL7 = "å‘ä¸‹æŠ¥æ–‡å¹³å‡å¤„ç†æ—¶é—´##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGDEALTIME) as å‘ä¸‹å¹³å‡å¤„ç†æ—¶é—´ from TABPMTSNPC where MSGDIRECTION = 'D' group by MSGTIME order by MSGTIME";
+	String PMTSNPCSQL8 = "æŒ‰æŠ¥æ–‡ç±»åž‹ç»Ÿè®¡å¹³å‡å¤„ç†æ—¶é—´##select TU.MSGTIME,TU.MSGTYPE,TU.å‘ä¸Šå¹³å‡å¤„ç†æ—¶é—´,TD.å‘ä¸‹å¹³å‡å¤„ç†æ—¶é—´ from (select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGFWTIME) as å‘ä¸Šå¹³å‡å¤„ç†æ—¶é—´ from TABPMTSNPC where MSGDIRECTION = 'U' group by MSGTIME,MSGTYPE)TU,(select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGDEALTIME) as å‘ä¸‹å¹³å‡å¤„ç†æ—¶é—´ from TABPMTSNPC where MSGDIRECTION = 'D' group by MSGTIME,MSGTYPE)TD where TU.MSGTIME = TD.MSGTIME and TU.MSGTYPE = TD.MSGTYPE order by MSGTIME";
+	String PMTSNPCSQL9 = "æŒ‰æŠ¥æ–‡ç±»åž‹ç»Ÿè®¡å‘ä¸ŠæŠ¥æ–‡å¹³å‡å¤„ç†æ—¶é—´##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGFWTIME) as å‘ä¸Šå¹³å‡å¤„ç†æ—¶é—´ from TABPMTSNPC where MSGDIRECTION = 'U' group by MSGTIME,MSGTYPE order by MSGTIME";
+	String PMTSNPCSQL10 = "æŒ‰æŠ¥æ–‡ç±»åž‹ç»Ÿè®¡å‘ä¸‹æŠ¥æ–‡å¹³å‡å¤„ç†æ—¶é—´##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGDEALTIME) as å‘ä¸‹å¹³å‡å¤„ç†æ—¶é—´ from TABPMTSNPC where MSGDIRECTION = 'D' group by MSGTIME,MSGTYPE order by MSGTIME";
 
-	String PMTSCCPCSQL1 = "±¨ÎÄ×ÜÊý##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,count(*) as ±¨ÎÄ×ÜÊý from TABPMTSCCPC group by Ê±¼ä¶Î order by Ê±¼ä¶Î";
-	String PMTSCCPCSQL2 = "°´±¨ÎÄÀàÐÍµÄ±¨ÎÄ×Ü±ÊÊý##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,MSGTYPE as ±¨ÎÄÀàÐÍ,count(*) as ±¨ÎÄ×ÜÊý from TABPMTSCCPC group by Ê±¼ä¶Î,MSGTYPE order by Ê±¼ä¶Î";
-	String PMTSCCPCSQL3 = "µ¥Î»Ê±¼äÄÚÔËÐÐ½ø³ÌÊý##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,count(distinct(PID)) as ½ø³ÌÊý from TABPMTSCCPC group by Ê±¼ä¶Î order by Ê±¼ä¶Î";
-	String PMTSCCPCSQL4 = "µ¥Î»Ê±¼äÄÚµ¥½ø³Ì´¦Àí×î´ó±¨ÎÄÊý##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as Ê±¼ä¶Î,PID as ½ø³ÌºÅ,count(*) as ±¨ÎÄ×ÜÊý from TABPMTSCCPC group by Ê±¼ä¶Î,½ø³ÌºÅ order by Ê±¼ä¶Î";
-	String PMTSCCPCSQL5 = "±¨ÎÄÆ½¾ù´¦ÀíÊ±¼ä##select TU.MSGTIME,TU.ÏòÉÏÆ½¾ù´¦ÀíÊ±¼ä,TD.ÏòÏÂÆ½¾ù´¦ÀíÊ±¼ä from (select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGDEALTIME) as ÏòÉÏÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSCCPC where MSGDIRECTION = 'U' group by MSGTIME)TU,(select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGFWTIME) as ÏòÏÂÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSCCPC where MSGDIRECTION = 'D' group by MSGTIME)TD where TU.MSGTIME = TD.MSGTIME order by MSGTIME";
-	String PMTSCCPCSQL6 = "ÏòÉÏ±¨ÎÄÆ½¾ù´¦ÀíÊ±¼ä##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGDEALTIME) as ÏòÉÏÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSCCPC where MSGDIRECTION = 'U' group by MSGTIME order by MSGTIME";
-	String PMTSCCPCSQL7 = "ÏòÏÂ±¨ÎÄÆ½¾ù´¦ÀíÊ±¼ä##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGFWTIME) as ÏòÏÂÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSCCPC where MSGDIRECTION = 'D' group by MSGTIME order by MSGTIME";
-	String PMTSCCPCSQL8 = "°´±¨ÎÄÀàÐÍÍ³¼ÆÆ½¾ù´¦ÀíÊ±¼ä##select TU.MSGTIME,TU.MSGTYPE,TU.ÏòÉÏÆ½¾ù´¦ÀíÊ±¼ä,TD.ÏòÏÂÆ½¾ù´¦ÀíÊ±¼ä from (select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGFWTIME) as ÏòÉÏÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSCCPC where MSGDIRECTION = 'U' group by MSGTIME,MSGTYPE)TU,(select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGDEALTIME) as ÏòÏÂÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSCCPC where MSGDIRECTION = 'D' group by MSGTIME,MSGTYPE)TD where TU.MSGTIME = TD.MSGTIME and TU.MSGTYPE = TD.MSGTYPE order by MSGTIME";
-	String PMTSCCPCSQL9 = "°´±¨ÎÄÀàÐÍÍ³¼ÆÏòÉÏ±¨ÎÄÆ½¾ù´¦ÀíÊ±¼ä##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGDEALTIME) as ÏòÉÏÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSCCPC where MSGDIRECTION = 'U' group by MSGTIME,MSGTYPE order by MSGTIME";
-	String PMTSCCPCSQL10 = "°´±¨ÎÄÀàÐÍÍ³¼ÆÏòÏÂ±¨ÎÄÆ½¾ù´¦ÀíÊ±¼ä##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGFWTIME) as ÏòÏÂÆ½¾ù´¦ÀíÊ±¼ä from TABPMTSCCPC where MSGDIRECTION = 'D' group by MSGTIME,MSGTYPE order by MSGTIME";
+	String PMTSCCPCSQL1 = "æŠ¥æ–‡æ€»æ•°##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,count(*) as æŠ¥æ–‡æ€»æ•° from TABPMTSCCPC group by æ—¶é—´æ®µ order by æ—¶é—´æ®µ";
+	String PMTSCCPCSQL2 = "æŒ‰æŠ¥æ–‡ç±»åž‹çš„æŠ¥æ–‡æ€»ç¬”æ•°##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,MSGTYPE as æŠ¥æ–‡ç±»åž‹,count(*) as æŠ¥æ–‡æ€»æ•° from TABPMTSCCPC group by æ—¶é—´æ®µ,MSGTYPE order by æ—¶é—´æ®µ";
+	String PMTSCCPCSQL3 = "å•ä½æ—¶é—´å†…è¿è¡Œè¿›ç¨‹æ•°##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,count(distinct(PID)) as è¿›ç¨‹æ•° from TABPMTSCCPC group by æ—¶é—´æ®µ order by æ—¶é—´æ®µ";
+	String PMTSCCPCSQL4 = "å•ä½æ—¶é—´å†…å•è¿›ç¨‹å¤„ç†æœ€å¤§æŠ¥æ–‡æ•°##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as æ—¶é—´æ®µ,PID as è¿›ç¨‹å·,count(*) as æŠ¥æ–‡æ€»æ•° from TABPMTSCCPC group by æ—¶é—´æ®µ,è¿›ç¨‹å· order by æ—¶é—´æ®µ";
+	String PMTSCCPCSQL5 = "æŠ¥æ–‡å¹³å‡å¤„ç†æ—¶é—´##select TU.MSGTIME,TU.å‘ä¸Šå¹³å‡å¤„ç†æ—¶é—´,TD.å‘ä¸‹å¹³å‡å¤„ç†æ—¶é—´ from (select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGDEALTIME) as å‘ä¸Šå¹³å‡å¤„ç†æ—¶é—´ from TABPMTSCCPC where MSGDIRECTION = 'U' group by MSGTIME)TU,(select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGFWTIME) as å‘ä¸‹å¹³å‡å¤„ç†æ—¶é—´ from TABPMTSCCPC where MSGDIRECTION = 'D' group by MSGTIME)TD where TU.MSGTIME = TD.MSGTIME order by MSGTIME";
+	String PMTSCCPCSQL6 = "å‘ä¸ŠæŠ¥æ–‡å¹³å‡å¤„ç†æ—¶é—´##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGDEALTIME) as å‘ä¸Šå¹³å‡å¤„ç†æ—¶é—´ from TABPMTSCCPC where MSGDIRECTION = 'U' group by MSGTIME order by MSGTIME";
+	String PMTSCCPCSQL7 = "å‘ä¸‹æŠ¥æ–‡å¹³å‡å¤„ç†æ—¶é—´##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,avg(MSGFWTIME) as å‘ä¸‹å¹³å‡å¤„ç†æ—¶é—´ from TABPMTSCCPC where MSGDIRECTION = 'D' group by MSGTIME order by MSGTIME";
+	String PMTSCCPCSQL8 = "æŒ‰æŠ¥æ–‡ç±»åž‹ç»Ÿè®¡å¹³å‡å¤„ç†æ—¶é—´##select TU.MSGTIME,TU.MSGTYPE,TU.å‘ä¸Šå¹³å‡å¤„ç†æ—¶é—´,TD.å‘ä¸‹å¹³å‡å¤„ç†æ—¶é—´ from (select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGFWTIME) as å‘ä¸Šå¹³å‡å¤„ç†æ—¶é—´ from TABPMTSCCPC where MSGDIRECTION = 'U' group by MSGTIME,MSGTYPE)TU,(select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGDEALTIME) as å‘ä¸‹å¹³å‡å¤„ç†æ—¶é—´ from TABPMTSCCPC where MSGDIRECTION = 'D' group by MSGTIME,MSGTYPE)TD where TU.MSGTIME = TD.MSGTIME and TU.MSGTYPE = TD.MSGTYPE order by MSGTIME";
+	String PMTSCCPCSQL9 = "æŒ‰æŠ¥æ–‡ç±»åž‹ç»Ÿè®¡å‘ä¸ŠæŠ¥æ–‡å¹³å‡å¤„ç†æ—¶é—´##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGDEALTIME) as å‘ä¸Šå¹³å‡å¤„ç†æ—¶é—´ from TABPMTSCCPC where MSGDIRECTION = 'U' group by MSGTIME,MSGTYPE order by MSGTIME";
+	String PMTSCCPCSQL10 = "æŒ‰æŠ¥æ–‡ç±»åž‹ç»Ÿè®¡å‘ä¸‹æŠ¥æ–‡å¹³å‡å¤„ç†æ—¶é—´##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGFWTIME) as å‘ä¸‹å¹³å‡å¤„ç†æ—¶é—´ from TABPMTSCCPC where MSGDIRECTION = 'D' group by MSGTIME,MSGTYPE order by MSGTIME";
 
-	String HELPINFO0 = "ÈÕÖ¾·ÖÎöÀàÐÍ£ºÖ§³ÖÈýÖÖÈÕÖ¾£¬MCTLÈÕÖ¾¡¢PMTSNPCÈÕÖ¾ºÍPMTSCCPCÈÕÖ¾\n\n";
-	String HELPINFO1 = "Êý¾Ý¿â±£´æ·½Ê½£ºMEMORY:Êý¾Ý¿â±£´æÔÚÄÚ´æÖÐ£¬DISK:Êý¾Ý¿â±£´æÔÚ´ÅÅÌÉÏ\n\n";
-	String HELPINFO2 = "Êý¾Ý¿âÃû£ºÉèÖÃÊý¾Ý¿âÃû£¬Ä¬ÈÏÎªtest£¬ÈôÊý¾Ý¿â±£´æ·½Ê½Îªdisk£¬Êý¾Ý¿âÃû¾ö¶¨±¾µØÊý¾Ý¿âÎÄ¼þµÄÃû³Æ\n\n";
-	String HELPINFO3 = "±¾µØÊý¾Ý¿âÄ¿Â¼£ºÉèÖÃ±¾µØÊý¾Ý¿âÎÄ¼þËùÔÚµÄÄ¿Â¼£¬¿ÉÓÃÎÄ¼þÑ¡ÔñÆ÷Ñ¡Ôñ±¾µØÊý¾Ý¿âÎÄ¼þËùÔÚµÄÄ¿Â¼£¬Ò²¿ÉÒÔÖ±½ÓÑ¡Ôñ±¾µØÊý¾Ý¿âÎÄ¼þ\n\n";
-	String HELPINFO4 = "Á¬½ÓÊý¾Ý¿â£º¿ÉÒÔÖ±½ÓÁ¬½Ó±£´æÔÚµÄ´ÅÅÌÉÏµÄ±¾µØÊý¾Ý¿â£¬Ö´ÐÐsql²éÑ¯½á¹û\n\n";
-	String HELPINFO5 = "ÈÕÖ¾Ä¿Â¼£ºÑ¡ÔñÈÕÖ¾ËùÔÚµÄÄ¿Â¼\n\n";
-	String HELPINFO6 = "ÎÄ¼þ¹Ø¼ü×Ö£ºÉèÖÃÈÕÖ¾ÎÄ¼þÃûµÄ¹ýÂË»úÖÆ£¬¿ÉÒÔ×Ô¼º±à¼­\n\n";
-	String HELPINFO7 = "Æô¶¯·ÖÎö£º¿ªÊ¼·ÖÎöÈÕÖ¾£¬Ð´Èë½á¹ûµ½Êý¾Ý¿âÖÐ\n\n";
-	String HELPINFO8 = "SQLÓï¾ä£ºÉèÖÃsqlÓï¾ä£¬¿ÉÒÔ×Ô¼º±à¼­\n\n";
-	String HELPINFO9 = "Ö´ÐÐSQL£¬Ö´ÐÐÇ°ÃæµÄsqlÓï¾ä\n\n";
+	String HELPINFO0 = "æ—¥å¿—åˆ†æžç±»åž‹ï¼šæ”¯æŒä¸‰ç§æ—¥å¿—ï¼ŒMCTLæ—¥å¿—ã€PMTSNPCæ—¥å¿—å’ŒPMTSCCPCæ—¥å¿—\n\n";
+	String HELPINFO1 = "æ•°æ®åº“ä¿å­˜æ–¹å¼ï¼šMEMORY:æ•°æ®åº“ä¿å­˜åœ¨å†…å­˜ä¸­ï¼ŒDISK:æ•°æ®åº“ä¿å­˜åœ¨ç£ç›˜ä¸Š\n\n";
+	String HELPINFO2 = "æ•°æ®åº“åï¼šè®¾ç½®æ•°æ®åº“åï¼Œé»˜è®¤ä¸ºtestï¼Œè‹¥æ•°æ®åº“ä¿å­˜æ–¹å¼ä¸ºdiskï¼Œæ•°æ®åº“åå†³å®šæœ¬åœ°æ•°æ®åº“æ–‡ä»¶çš„åç§°\n\n";
+	String HELPINFO3 = "æœ¬åœ°æ•°æ®åº“ç›®å½•ï¼šè®¾ç½®æœ¬åœ°æ•°æ®åº“æ–‡ä»¶æ‰€åœ¨çš„ç›®å½•ï¼Œå¯ç”¨æ–‡ä»¶é€‰æ‹©å™¨é€‰æ‹©æœ¬åœ°æ•°æ®åº“æ–‡ä»¶æ‰€åœ¨çš„ç›®å½•ï¼Œä¹Ÿå¯ä»¥ç›´æŽ¥é€‰æ‹©æœ¬åœ°æ•°æ®åº“æ–‡ä»¶\n\n";
+	String HELPINFO4 = "è¿žæŽ¥æ•°æ®åº“ï¼šå¯ä»¥ç›´æŽ¥è¿žæŽ¥ä¿å­˜åœ¨çš„ç£ç›˜ä¸Šçš„æœ¬åœ°æ•°æ®åº“ï¼Œæ‰§è¡ŒsqlæŸ¥è¯¢ç»“æžœ\n\n";
+	String HELPINFO5 = "æ—¥å¿—ç›®å½•ï¼šé€‰æ‹©æ—¥å¿—æ‰€åœ¨çš„ç›®å½•\n\n";
+	String HELPINFO6 = "æ–‡ä»¶å…³é”®å­—ï¼šè®¾ç½®æ—¥å¿—æ–‡ä»¶åçš„è¿‡æ»¤æœºåˆ¶ï¼Œå¯ä»¥è‡ªå·±ç¼–è¾‘\n\n";
+	String HELPINFO7 = "å¯åŠ¨åˆ†æžï¼šå¼€å§‹åˆ†æžæ—¥å¿—ï¼Œå†™å…¥ç»“æžœåˆ°æ•°æ®åº“ä¸­\n\n";
+	String HELPINFO8 = "SQLè¯­å¥ï¼šè®¾ç½®sqlè¯­å¥ï¼Œå¯ä»¥è‡ªå·±ç¼–è¾‘\n\n";
+	String HELPINFO9 = "æ‰§è¡ŒSQLï¼Œæ‰§è¡Œå‰é¢çš„sqlè¯­å¥\n\n";
 	
 	
 	String[] MCTLFILTER = { "NETS_", "IBPS_", "BEPS_", "HVPS_", "SAPS" };
@@ -56,18 +56,18 @@ public interface Data {
 			+ HELPINFO7 + HELPINFO8 + HELPINFO9;
 	
 
-	String MCTLMSGSTART = "Level 0 : "; // ÈÕÖ¾¿é¿ªÊ¼
-	String MCTLMSGEND = "] **"; // ÈÕÖ¾¿é½áÎ²
-	String MCTLMQPUT = "±¨ÎÄ·ÅÖÃÊ±¼ä";
-	String MCTLMQRECV = "±¨ÎÄ¶ÁÈ¡Ê±¼ä";
-	String MCTLMSGDEAL = "´¦Àí±¨ÎÄÊ±¼ä";
-	String MCTLPROC = "´¦Àí½á¹û:";
-	String PMTSMSGSTARTFLAG = "Level 0 PMTSMSGHDL:"; // PMTSÈÕÖ¾¿ªÊ¼±êÖ¾
-	String MSGBODYFINSHEDFLAG = "</Document>"; // ±¨ÎÄÕýÎÄ½áÊø±êÖ¾
-	String PMTSPRENODETIMEFLAG = "Ç°Ò»½Úµã·¢ËÍÊ±¼ä"; // Ç°Ò»½Úµã·¢ËÍÊ±¼ä
-	String PMTSUHEADFLAG = "{U:"; // PMTS-UÍ·±êÖ¾ÐÅÏ¢
-	String PMTSUENDFLAG = "}"; // PMTS-UÍ·½áÎ²±êÖ¾ÐÅÏ¢
-	String IBPSMSGHEAD = "{H:01"; // ÍøÒø±¨ÎÄÍ·
-	String CNAPSMSGHEAD = "{H:02"; // ¶þ´ú±¨ÎÄÍ·
-	String CNCCMSGHEAD = "{N:01"; // CNCC±¨ÎÄÍ·
+	String MCTLMSGSTART = "Level 0 : "; // æ—¥å¿—å—å¼€å§‹
+	String MCTLMSGEND = "] **"; // æ—¥å¿—å—ç»“å°¾
+	String MCTLMQPUT = "æŠ¥æ–‡æ”¾ç½®æ—¶é—´";
+	String MCTLMQRECV = "æŠ¥æ–‡è¯»å–æ—¶é—´";
+	String MCTLMSGDEAL = "å¤„ç†æŠ¥æ–‡æ—¶é—´";
+	String MCTLPROC = "å¤„ç†ç»“æžœ:";
+	String PMTSMSGSTARTFLAG = "Level 0 PMTSMSGHDL:"; // PMTSæ—¥å¿—å¼€å§‹æ ‡å¿—
+	String MSGBODYFINSHEDFLAG = "</Document>"; // æŠ¥æ–‡æ­£æ–‡ç»“æŸæ ‡å¿—
+	String PMTSPRENODETIMEFLAG = "å‰ä¸€èŠ‚ç‚¹å‘é€æ—¶é—´"; // å‰ä¸€èŠ‚ç‚¹å‘é€æ—¶é—´
+	String PMTSUHEADFLAG = "{U:"; // PMTS-Uå¤´æ ‡å¿—ä¿¡æ¯
+	String PMTSUENDFLAG = "}"; // PMTS-Uå¤´ç»“å°¾æ ‡å¿—ä¿¡æ¯
+	String IBPSMSGHEAD = "{H:01"; // ç½‘é“¶æŠ¥æ–‡å¤´
+	String CNAPSMSGHEAD = "{H:02"; // äºŒä»£æŠ¥æ–‡å¤´
+	String CNCCMSGHEAD = "{N:01"; // CNCCæŠ¥æ–‡å¤´
 }

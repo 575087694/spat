@@ -18,29 +18,29 @@ import tools.Data;
 import tools.UtilTools;
 
 public class MCTL implements Data{
-	int count = 0; // SQL¼ÆÊı
-	String msgblock = new String(); // ÈÕÖ¾¿é
-	String filepath = new String(); // ÈÕÖ¾Ä¿Â¼
-	String filter = new String(); // ÈÕÖ¾¹Ø¼ü×Ö
-	Connection dbconn; // Êı¾İ¿âÁ¬½Ó³Ø
-	PreparedStatement ps; // Ô¤´¦ÀíSQL
-	JTextArea textArea = null; // Êä³ö¿ò
-	MCTLMAP mctlmap = new MCTLMAP(); // ÈÕÖ¾·ÖÎö½á¹û
+	int count = 0; // SQLè®¡æ•°
+	String msgblock = new String(); // æ—¥å¿—å—
+	String filepath = new String(); // æ—¥å¿—ç›®å½•
+	String filter = new String(); // æ—¥å¿—å…³é”®å­—
+	Connection dbconn; // æ•°æ®åº“è¿æ¥æ± 
+	PreparedStatement ps; // é¢„å¤„ç†SQL
+	JTextArea textArea = null; // è¾“å‡ºæ¡†
+	MCTLMAP mctlmap = new MCTLMAP(); // æ—¥å¿—åˆ†æç»“æœ
 
 	class MCTLMAP {
-		String msgtype;// ±¨ÎÄÀàĞÍ
-		String pid;// ½ø³ÌºÅ
-		String mqputtime; // ±¨ÎÄ·ÅÖÃÊ±¼ä
-		String mqrecvtime; // ±¨ÎÄ¶ÁÈ¡Ê±¼ä
-		String msgdealstime; // ´¦Àí±¨ÎÄ¿ªÊ¼Ê±¼ä
-		String msgdealetime; // ´¦Àí±¨ÎÄ½áÊøÊ±¼ä
-		long msgmqwaittime; // ÒµÎñMQµÈ´ıÊ±¼ä
-		long msgwaittime; // ÒµÎñµÈ´ı´¦ÀíÊ±¼ä
-		long msgdealtime; // ÒµÎñ´¦ÀíÊ±¼ä
-		String procerrmesg; // ÒµÎñ´¦ÀíÃèÊö
+		String msgtype;// æŠ¥æ–‡ç±»å‹
+		String pid;// è¿›ç¨‹å·
+		String mqputtime; // æŠ¥æ–‡æ”¾ç½®æ—¶é—´
+		String mqrecvtime; // æŠ¥æ–‡è¯»å–æ—¶é—´
+		String msgdealstime; // å¤„ç†æŠ¥æ–‡å¼€å§‹æ—¶é—´
+		String msgdealetime; // å¤„ç†æŠ¥æ–‡ç»“æŸæ—¶é—´
+		long msgmqwaittime; // ä¸šåŠ¡MQç­‰å¾…æ—¶é—´
+		long msgwaittime; // ä¸šåŠ¡ç­‰å¾…å¤„ç†æ—¶é—´
+		long msgdealtime; // ä¸šåŠ¡å¤„ç†æ—¶é—´
+		String procerrmesg; // ä¸šåŠ¡å¤„ç†æè¿°
 	}
 
-	// ³õÊ¼»¯²ÎÊı
+	// åˆå§‹åŒ–å‚æ•°
 	public MCTL(Connection dbconn, String filepath, String filter, JTextArea textArea) {
 		this.dbconn = dbconn;
 		this.filepath = filepath;
@@ -48,7 +48,7 @@ public class MCTL implements Data{
 		this.textArea = textArea;
 	}
 
-	// »ñÈ¡±¨ÎÄÀàĞÍ
+	// è·å–æŠ¥æ–‡ç±»å‹
 	public void parseMsg() {
 		try {
 			int pos1 = msgblock.indexOf(IBPSMSGHEAD);
@@ -59,11 +59,11 @@ public class MCTL implements Data{
 				}
 			}
 			if (-1 == pos1) {
-				throw new Exception("±¨ÎÄÍ·²»ÊÇÍøÒø±¨ÎÄÍ·»ò¶ş´ú±¨ÎÄÍ·»òCNCC±¨ÎÄÍ·£¡");
+				throw new Exception("æŠ¥æ–‡å¤´ä¸æ˜¯ç½‘é“¶æŠ¥æ–‡å¤´æˆ–äºŒä»£æŠ¥æ–‡å¤´æˆ–CNCCæŠ¥æ–‡å¤´ï¼");
 			}
 			int pos2 = msgblock.indexOf(MCTLPROC);
 			if (-1 == pos2) {
-				throw new Exception("Ã»ÓĞÕÒµ½±¨ÎÄ½áÎ²£¡,ÇëÈ·ÈÏ±¨ÎÄ¸ñÊ½£¡");
+				throw new Exception("æ²¡æœ‰æ‰¾åˆ°æŠ¥æ–‡ç»“å°¾ï¼,è¯·ç¡®è®¤æŠ¥æ–‡æ ¼å¼ï¼");
 			}
 			String msg = msgblock.substring(pos1, pos2);
 			if (-1 != msg.indexOf(IBPSMSGHEAD)) {
@@ -82,7 +82,7 @@ public class MCTL implements Data{
 
 	}
 
-	// »ñÈ¡½ø³ÌºÅ
+	// è·å–è¿›ç¨‹å·
 	public void getPid() {
 		int pos1 = msgblock.indexOf("[", 2);
 		int pos2 = msgblock.indexOf("]", pos1);
@@ -93,7 +93,7 @@ public class MCTL implements Data{
 		}
 	}
 
-	// »ñÈ¡±¨ÎÄ·ÅÖÃÊ±¼ä
+	// è·å–æŠ¥æ–‡æ”¾ç½®æ—¶é—´
 	public void getMqPutTime() {
 		int pos = msgblock.indexOf(MCTLMQPUT);
 		if (pos != -1) {
@@ -103,7 +103,7 @@ public class MCTL implements Data{
 		}
 	}
 
-	// »ñÈ¡±¨ÎÄ¶ÁÈ¡Ê±¼ä
+	// è·å–æŠ¥æ–‡è¯»å–æ—¶é—´
 	public void getMqRecvTime() {
 		int pos = msgblock.indexOf(MCTLMQRECV);
 		if (pos != -1) {
@@ -113,7 +113,7 @@ public class MCTL implements Data{
 		}
 	}
 
-	// »ñÈ¡±¨ÎÄ´¦Àí¿ªÊ¼Ê±¼ä
+	// è·å–æŠ¥æ–‡å¤„ç†å¼€å§‹æ—¶é—´
 	public void getMsgDealSTime() {
 		int pos = msgblock.indexOf(MCTLMSGDEAL);
 		if (pos != -1) {
@@ -123,7 +123,7 @@ public class MCTL implements Data{
 		}
 	}
 
-	// »ñÈ¡±¨ÎÄ´¦Àí½áÊøÊ±¼ä
+	// è·å–æŠ¥æ–‡å¤„ç†ç»“æŸæ—¶é—´
 	public void getMsgDealETime() {
 		int pos = msgblock.indexOf("[");
 		if (pos != -1) {
@@ -133,7 +133,7 @@ public class MCTL implements Data{
 		}
 	}
 
-	// »ñÈ¡ÒµÎñ´¦ÀíÃèÊö
+	// è·å–ä¸šåŠ¡å¤„ç†æè¿°
 	public void getProcErrMsg() {
 		int pos1 = msgblock.indexOf(MCTLPROC);
 		int pos2 = msgblock.indexOf("[", pos1);
@@ -145,7 +145,7 @@ public class MCTL implements Data{
 		}
 	}
 
-	// ³õÊ¼»¯±í
+	// åˆå§‹åŒ–è¡¨
 	public void initMCTLTab(Connection conn) {
 		try {
 			Statement stmt = conn.createStatement();
@@ -158,7 +158,7 @@ public class MCTL implements Data{
 		}
 	}
 
-	// ½á¹û²åÈëÊı¾İ¿â
+	// ç»“æœæ’å…¥æ•°æ®åº“
 	public void insertDataBase() {
 		try {
 			if (count == 0) {
@@ -183,11 +183,11 @@ public class MCTL implements Data{
 				count = 0;
 			}
 		} catch (SQLException e) {
-			textArea.append("Êı¾İ²åÈëÊı¾İ¿âÊ§°Ü£¡\n\n");
+			textArea.append("æ•°æ®æ’å…¥æ•°æ®åº“å¤±è´¥ï¼\n\n");
 		}
 	}
 
-	// ½âÎöÈÕÖ¾¿é
+	// è§£ææ—¥å¿—å—
 	public void parseMCTL() {
 		parseMsg();
 		getPid();
@@ -202,7 +202,7 @@ public class MCTL implements Data{
 		insertDataBase();
 	}
 
-	// Ö÷·½·¨
+	// ä¸»æ–¹æ³•
 	public void runMainMethod() {
 		ArrayList<String> filelist = new ArrayList<String>();
 		ArrayList<String> sdirlist = new ArrayList<String>();
@@ -244,13 +244,13 @@ public class MCTL implements Data{
 				count = 0;
 			}
 		} catch (SQLException e) {
-			textArea.append("Êı¾İ¿âÁ¬½ÓÊ§°Ü£¡\n\n");
+			textArea.append("æ•°æ®åº“è¿æ¥å¤±è´¥ï¼\n\n");
 		} catch (FileNotFoundException e) {
-			textArea.append("ÎÄ¼şÎ´ÕÒµ½£¡\n\n");
+			textArea.append("æ–‡ä»¶æœªæ‰¾åˆ°ï¼\n\n");
 		} catch (IOException e) {
-			textArea.append("ÎÄ¼ş¶ÁÈ¡´íÎó£¡\n\n");
+			textArea.append("æ–‡ä»¶è¯»å–é”™è¯¯ï¼\n\n");
 		} catch (Exception e) {
-			textArea.append("ÆäËû´íÎó£¡\n\n");
+			textArea.append("å…¶ä»–é”™è¯¯ï¼\n\n");
 		}
 	}
 }
