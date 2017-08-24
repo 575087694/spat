@@ -1,16 +1,14 @@
 package spat;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JTextArea;
 
@@ -19,7 +17,7 @@ import tools.UtilTools;
 
 public class MCTL implements Data{
 	int count = 0; // SQL计数
-	String msgblock = new String(); // 日志块
+	StringBuilder msgblock = new StringBuilder(); // 日志块
 	String filepath = new String(); // 日志目录
 	String filter = new String(); // 日志关键字
 	Connection dbconn; // 数据库连接池
@@ -77,7 +75,8 @@ public class MCTL implements Data{
 			}
 			mctlmap.msgtype = mctlmap.msgtype.trim();
 		} catch (Exception e) {
-			textArea.append(e.getMessage()+"\n");
+			textArea.append(e.getMessage()+"\n\n");
+			e.printStackTrace();
 		}
 
 	}
@@ -151,9 +150,10 @@ public class MCTL implements Data{
 			Statement stmt = conn.createStatement();
 			stmt.executeUpdate("DROP TABLE IF EXISTS TABMCTL");
 			stmt.executeUpdate(
-					"CREATE TABLE TABMCTL(MSGTYPE CHAR(15),PID CHAR(8),MQPUTTIME CHAR(26),MQRECVTIME CHAR(26),MSGDEALSTIME CHAR(26),MSGDEALETIME CHAR(26),MSGMQWAITTIME INT,MSGWAITTIME INT,MSGDEALTIME INT,PROCERRMESG VARCHAR(512));");
+					"CREATE TABLE TABMCTL(MSGTYPE CHAR(15),PID CHAR(8),MQPUTTIME CHAR(26),MQRECVTIME CHAR(26),MSGDEALSTIME CHAR(26),MSGDEALETIME CHAR(26),MSGMQWAITTIME BIGINT,MSGWAITTIME BIGINT,MSGDEALTIME BIGINT,PROCERRMESG VARCHAR(512));");
 			stmt.close();
 		} catch (SQLException e) {
+			textArea.append(e.getMessage()+"\n\n");
 			e.printStackTrace();
 		}
 	}
@@ -177,13 +177,15 @@ public class MCTL implements Data{
 			ps.setString(10, mctlmap.procerrmesg);
 			ps.addBatch();
 			++count;
+
 			if (count == 1000) {
 				ps.executeBatch();
 				ps.close();
 				count = 0;
 			}
 		} catch (SQLException e) {
-			textArea.append("数据插入数据库失败！\n\n");
+			textArea.append(e.getMessage()+"\n\n");
+			e.printStackTrace();
 		}
 	}
 
@@ -210,47 +212,37 @@ public class MCTL implements Data{
 		initMCTLTab(dbconn);
 		try {
 			boolean sign = false;
-			String line = new String();
 			for (String path : filelist) {
-				File f = new File(path);
-				FileInputStream fi = new FileInputStream(f);
-				InputStreamReader in = new InputStreamReader(fi, "UTF-8");
-				BufferedReader br = new BufferedReader(in);
-				while ((line = br.readLine()) != null) {
+				List<String> lines = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8); 
+				for(String line : lines){  
 					if (sign) {
 						if (line.indexOf(MCTLMSGEND) != -1) {
-							msgblock = msgblock + line;
+							msgblock.append(line);
 							parseMCTL();
 							sign = false;
 						} else if (line.indexOf(MCTLMSGSTART) != -1) {
-							msgblock = line;
+							msgblock.setLength(0);
+							msgblock.append(line);
 						} else {
-							msgblock = msgblock + line;
+							msgblock.append(line);
 						}
 					} else {
 						if (line.indexOf(MCTLMSGSTART) != -1) {
 							sign = true;
-							msgblock = line;
+							msgblock.setLength(0);
+							msgblock.append(line);
 						}
 					}
 				}
-				br.close();
-				in.close();
-				fi.close();
 			}
 			if (count != 0) {
 				ps.executeBatch();
 				ps.close();
 				count = 0;
 			}
-		} catch (SQLException e) {
-			textArea.append("数据库连接失败！\n\n");
-		} catch (FileNotFoundException e) {
-			textArea.append("文件未找到！\n\n");
-		} catch (IOException e) {
-			textArea.append("文件读取错误！\n\n");
 		} catch (Exception e) {
-			textArea.append("其他错误！\n\n");
+			textArea.append(e.getMessage()+"\n\n");
+			e.printStackTrace();
 		}
 	}
 }

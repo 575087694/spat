@@ -10,14 +10,7 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -39,7 +32,6 @@ import javax.swing.plaf.metal.MetalLookAndFeel;
 import javax.swing.plaf.metal.OceanTheme;
 
 import tools.Data;
-import tools.MyChart;
 import tools.UtilTools;
 
 public class RunUI implements Data {
@@ -48,10 +40,12 @@ public class RunUI implements Data {
 	final JTextArea textArea = new JTextArea();
 	Connection dbconn = null;
 
+	/*
 	List<Date> lastDate = new ArrayList<Date>();
 	List<Date> nowDate = new ArrayList<Date>();
 	List<Double> lastData = new ArrayList<Double>();
 	List<Double> nowData = new ArrayList<Double>();
+	*/
 	
 	public RunUI() {
 		JFrame frame = new JFrame("交易系统日志分析工具");
@@ -100,9 +94,11 @@ public class RunUI implements Data {
 		typePanel.add(typeButton[0]);
 		typePanel.add(typeButton[1]);
 		typePanel.add(typeButton[2]);
+		/*
 		JButton chartButton = new JButton("画图");
 		chartButton.setBounds(725, 25, 100, winHeight / 20);
 		typePanel.add(chartButton);
+		*/
 		panelTop.add(typePanel);
 
 		// 数据库配置栏
@@ -128,11 +124,11 @@ public class RunUI implements Data {
 		publicPanel.setBounds(200, 15, winWidth - 240, winHeight / 12);
 		JLabel dbLabel0 = new JLabel("数据库名:");
 		dbLabel0.setBounds(35, 0, 60, winHeight / 12);
-		JTextField dbText0 = new JTextField("");
+		JTextField dbText0 = new JTextField("test");
 		dbText0.setBounds(95, 10, 60, winHeight / 20);
 		JLabel dbLabel = new JLabel("本地数据库目录:");
 		dbLabel.setBounds(200, 0, 90, winHeight / 12);
-		JTextField dbText1 = new JTextField("");
+		JTextField dbText1 = new JTextField(".");
 		dbText1.setBounds(300, 10, 115, winHeight / 20);
 		JButton dbButton = new JButton("...");
 		dbButton.setBounds(425, 10, 50, winHeight / 20);
@@ -158,7 +154,7 @@ public class RunUI implements Data {
 		timePanel.setLayout(null);
 		JLabel dirLabel = new JLabel("日志目录:");
 		dirLabel.setBounds(15, 15, winWidth / 3 + 40, winHeight / 12);
-		JTextField dirText = new JTextField("");
+		JTextField dirText = new JTextField(".");
 		dirText.setBounds(75, 25, winWidth / 3, winHeight / 20);
 		JButton dirButton = new JButton("...");
 		dirButton.setBounds(385, 25, 50, winHeight / 20);
@@ -233,6 +229,9 @@ public class RunUI implements Data {
 								dbText0.setText(dbname);
 								dbText1.setText(path);
 							}
+							else{
+								textArea.append("错误：选择的数据库文件不是.mv.db后缀！\n");
+							}
 						}
 					} else {
 						textArea.append("未知错误！\n");
@@ -291,6 +290,7 @@ public class RunUI implements Data {
 		confButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				dbconn = UtilTools.createConnection(dbText0.getText(), dataButton[0].isSelected(), dbText1.getText());
+				textArea.append("连接数据库成功！\n");		
 			}
 		});
 
@@ -315,6 +315,7 @@ public class RunUI implements Data {
 				}
 				long bb = System.currentTimeMillis();
 				System.out.println(bb - aa);
+				//textArea.setForeground(Color.RED);
 				textArea.append("日志分析完毕\n");
 			}
 		});
@@ -332,6 +333,7 @@ public class RunUI implements Data {
 					ResultSet rs = stmt.executeQuery(sql);
 					ResultSetMetaData rsmd = rs.getMetaData();
 					
+					/*
 					boolean flag = false;
 					lastDate.clear();
 					lastData.clear();
@@ -343,25 +345,24 @@ public class RunUI implements Data {
 					if (rsmd.getColumnTypeName(2).indexOf("INT") != -1) {
 						flag = true;
 					}
-					
+					*/
 					while (rs.next()) {
 						for (int i = 1; i <= rsmd.getColumnCount(); i++) {
 							textArea.append(rsmd.getColumnName(i) + ":" + rs.getString(rsmd.getColumnName(i)) + "    ");
 						}
 						textArea.append("\n");
-						
+						/*
 						if (flag) {
 							nowDate.add(sdf.parse(rs.getString(rsmd.getColumnName(1))));
 							nowData.add(Double.parseDouble(rs.getString(rsmd.getColumnName(2))));
 						}
+						*/
 					}
 					textArea.append("\n");
 					rs.close();
 					stmt.close();
-				} catch (SQLException e) {
-					textArea.append("查询语句错误!\n\n");
-					e.printStackTrace();
-				} catch (ParseException e){
+				} catch (Exception e){
+					textArea.append(e.getMessage()+"\n\n");
 					e.printStackTrace();
 				}
 			}
@@ -374,6 +375,7 @@ public class RunUI implements Data {
 			}
 		});
 		
+		/*
 		//制图
 		chartButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -387,6 +389,7 @@ public class RunUI implements Data {
 				chart.DisplayChart();
 			}
 		});
+		*/
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(new Dimension(winWidth, winHeight));

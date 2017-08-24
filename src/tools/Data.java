@@ -1,6 +1,7 @@
 package tools;
 
 public interface Data {
+	String MCTLSQL0 = "所有记录##select * from tabmctl";
 	String MCTLSQL1 = "报文总数##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as 时间段,count(*) as 报文总数,PROCERRMESG as 业务处理描述 from TABMCTL group by 时间段,业务处理描述 order by 时间段";
 	String MCTLSQL2 = "按报文类型的报文总笔数##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as 时间段,MSGTYPE as 报文类型,count(*) as 报文总数,PROCERRMESG as 业务处理描述 from TABMCTL group by 时间段,报文类型,业务处理描述 order by 时间段";
 	String MCTLSQL3 = "单位时间内运行进程数##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as 时间段,count(distinct(PID)) as 进程数 from TABMCTL group by 时间段 order by 时间段";
@@ -10,6 +11,7 @@ public interface Data {
 	String MCTLSQL7 = "报文平均处理时间##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as 时间段,avg(MSGDEALTIME) as 平均处理时间 from TABMCTL group by 时间段 order by 时间段";
 	String MCTLSQL8 = "按报文类型统计报文平均处理时间##select formatdatetime(MSGDEALSTIME, 'yyyy-MM-dd HH:00') as 时间段,MSGTYPE as 报文类型,avg(MSGDEALTIME) as 平均处理时间 from TABMCTL group by 时间段,报文类型 order by 时间段";
 
+	String PMTSNPCSQL0 = "所有记录##select * from tabpmtsnpc";
 	String PMTSNPCSQL1 = "报文总数##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as 时间段,count(*) as 报文总数 from TABPMTSNPC group by 时间段 order by 时间段";
 	String PMTSNPCSQL2 = "按报文类型的报文总笔数##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as 时间段,MSGTYPE as 报文类型,count(*) as 报文总数 from TABPMTSNPC group by 时间段,MSGTYPE order by 时间段";
 	String PMTSNPCSQL3 = "单位时间内运行进程数##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as 时间段,count(distinct(PID)) as 进程数 from TABPMTSNPC group by 时间段 order by 时间段";
@@ -21,6 +23,7 @@ public interface Data {
 	String PMTSNPCSQL9 = "按报文类型统计向上报文平均处理时间##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGFWTIME) as 向上平均处理时间 from TABPMTSNPC where MSGDIRECTION = 'U' group by MSGTIME,MSGTYPE order by MSGTIME";
 	String PMTSNPCSQL10 = "按报文类型统计向下报文平均处理时间##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as MSGTIME,MSGTYPE,avg(MSGDEALTIME) as 向下平均处理时间 from TABPMTSNPC where MSGDIRECTION = 'D' group by MSGTIME,MSGTYPE order by MSGTIME";
 
+	String PMTSCCPCSQL0 = "所有记录##select * from tabpmtsccpc";
 	String PMTSCCPCSQL1 = "报文总数##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as 时间段,count(*) as 报文总数 from TABPMTSCCPC group by 时间段 order by 时间段";
 	String PMTSCCPCSQL2 = "按报文类型的报文总笔数##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as 时间段,MSGTYPE as 报文类型,count(*) as 报文总数 from TABPMTSCCPC group by 时间段,MSGTYPE order by 时间段";
 	String PMTSCCPCSQL3 = "单位时间内运行进程数##select formatdatetime(MSGSENDTIME, 'yyyy-MM-dd HH:00') as 时间段,count(distinct(PID)) as 进程数 from TABPMTSCCPC group by 时间段 order by 时间段";
@@ -44,13 +47,13 @@ public interface Data {
 	String HELPINFO9 = "执行SQL，执行前面的sql语句\n\n";
 	
 	
-	String[] MCTLFILTER = { "NETS_", "IBPS_", "BEPS_", "HVPS_", "SAPS" };
+	String[] MCTLFILTER = {  "HVPS_", "NETS_", "IBPS_", "BEPS_", "SAPS_" };
 	String[] PMTSNPCFILTER = { "success." };
 	String[] PMTSCCPCFILTER = { "success." };
-	String[] MCTLSQL = { MCTLSQL1, MCTLSQL2, MCTLSQL3, MCTLSQL4, MCTLSQL5, MCTLSQL6, MCTLSQL7, MCTLSQL8 };
-	String[] PMTSNPCSQL = { PMTSNPCSQL1, PMTSNPCSQL2, PMTSNPCSQL3, PMTSNPCSQL4, PMTSNPCSQL5, PMTSNPCSQL6,
+	String[] MCTLSQL = { MCTLSQL0, MCTLSQL1, MCTLSQL2, MCTLSQL3, MCTLSQL4, MCTLSQL5, MCTLSQL6, MCTLSQL7, MCTLSQL8 };
+	String[] PMTSNPCSQL = { PMTSNPCSQL0, PMTSNPCSQL1, PMTSNPCSQL2, PMTSNPCSQL3, PMTSNPCSQL4, PMTSNPCSQL5, PMTSNPCSQL6,
 			PMTSNPCSQL7, PMTSNPCSQL8, PMTSNPCSQL9, PMTSNPCSQL10 };
-	String[] PMTSCCPCSQL = { PMTSCCPCSQL1, PMTSCCPCSQL2, PMTSCCPCSQL3, PMTSCCPCSQL4, PMTSCCPCSQL5, PMTSCCPCSQL6,
+	String[] PMTSCCPCSQL = { PMTSCCPCSQL0, PMTSCCPCSQL1, PMTSCCPCSQL2, PMTSCCPCSQL3, PMTSCCPCSQL4, PMTSCCPCSQL5, PMTSCCPCSQL6,
 			PMTSCCPCSQL7, PMTSCCPCSQL8, PMTSCCPCSQL9, PMTSCCPCSQL10 };
 	String HELPINFO = HELPINFO0 + HELPINFO1 + HELPINFO2 + HELPINFO3 + HELPINFO4 + HELPINFO5 + HELPINFO6
 			+ HELPINFO7 + HELPINFO8 + HELPINFO9;
