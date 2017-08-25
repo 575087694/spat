@@ -1,16 +1,14 @@
 package spat;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JTextArea;
 
@@ -19,7 +17,7 @@ import tools.UtilTools;
 
 public class PMTSCCPC implements Data{
 	int count = 0; // SQL计数
-	String msgblock = new String(); // 日志块
+	StringBuilder msgblock = new StringBuilder(); // 日志块
 	String filepath = new String(); // 日志目录
 	String filter = new String(); // 日志关键字
 	Connection dbconn; // 数据库连接池
@@ -139,6 +137,7 @@ public class PMTSCCPC implements Data{
 					"CREATE TABLE TABPMTSCCPC(MSGTYPE CHAR(15),PID CHAR(8),MSGDIRECTION CHAR(1),MSGSENDTIME CHAR(26),PREMSGSENDTIME CHAR(26),PMTSURECVTIME CHAR(26),MSGDEALTIME INT,MSGFWTIME INT);");
 			stmt.close();
 		} catch (SQLException e) {
+			textArea.append(e.getMessage()+"\n\n");
 			e.printStackTrace();
 		}
 	}
@@ -166,12 +165,13 @@ public class PMTSCCPC implements Data{
 				count = 0;
 			}
 		} catch (SQLException e) {
-			textArea.append("数据插入数据库失败！\n\n");
+			textArea.append(e.getMessage()+"\n\n");
+			e.printStackTrace();
 		}
 	}
 
 	// 解析日志块
-	public void parseMCTL() {
+	public void parsePMTS() {
 		getPid();
 		getMsgSendTime();
 		getPreMsgSendTime();
@@ -193,47 +193,36 @@ public class PMTSCCPC implements Data{
 		initPMTSCCPCTab(dbconn);
 		try {
 			boolean sign = false;
-			String line = new String();
 			for (String path : filelist) {
-				File f = new File(path);
-				FileInputStream fi = new FileInputStream(f);
-				InputStreamReader in = new InputStreamReader(fi, "UTF-8");
-				BufferedReader br = new BufferedReader(in);
-				while ((line = br.readLine()) != null) {
+				List<String> lines = Files.readAllLines(Paths.get(path), StandardCharsets.UTF_8); 
+				for(String line : lines){ 
 					if (sign) {
 						if (line.indexOf(MSGBODYFINSHEDFLAG) != -1) {
-							msgblock = msgblock + line;
-							parseMCTL();
+							msgblock.append(line);
+							parsePMTS();
 							sign = false;
 						} else if (line.indexOf(PMTSMSGSTARTFLAG) != -1) {
-							msgblock = line;
+							msgblock.setLength(0);
+							msgblock.append(line);
 						} else {
-							msgblock = msgblock + line;
+							msgblock.append(line);
 						}
 					} else {
 						if (line.indexOf(PMTSMSGSTARTFLAG) != -1) {
 							sign = true;
-							msgblock = line;
+							msgblock.setLength(0);
+							msgblock.append(line);
 						}
 					}
 				}
-				br.close();
-				in.close();
-				fi.close();
 			}
 			if (count != 0) {
 				ps.executeBatch();
 				ps.close();
 				count = 0;
 			}
-		} catch (SQLException e) {
-			textArea.append("数据库连接失败！\n\n");
-		} catch (FileNotFoundException e) {
-			textArea.append("文件未找到！\n\n");
-		} catch (IOException e) {
-			textArea.append("文件读取错误！\n\n");
 		} catch (Exception e) {
-			textArea.append("其他错误！\n\n");
+			textArea.append(e.getMessage()+"\n\n");
 			e.printStackTrace();
 		}
 	}

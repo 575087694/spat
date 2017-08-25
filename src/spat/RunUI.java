@@ -316,7 +316,7 @@ public class RunUI implements Data {
 				long bb = System.currentTimeMillis();
 				System.out.println(bb - aa);
 				//textArea.setForeground(Color.RED);
-				textArea.append("日志分析完毕\n");
+				textArea.append("日志分析完毕("+(bb-aa)+")\n");
 			}
 		});
 
