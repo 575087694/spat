@@ -137,6 +137,7 @@ public class PMTSNPC implements Data{
 					"CREATE TABLE TABPMTSNPC(MSGTYPE CHAR(15),PID CHAR(8),MSGDIRECTION CHAR(1),MSGSENDTIME CHAR(26),PREMSGSENDTIME CHAR(26),PMTSURECVTIME CHAR(26),MSGDEALTIME INT,MSGFWTIME INT);");
 			stmt.close();
 		} catch (SQLException e) {
+			textArea.append(e.getMessage()+"\n\n");
 			e.printStackTrace();
 		}
 	}
@@ -164,7 +165,8 @@ public class PMTSNPC implements Data{
 				count = 0;
 			}
 		} catch (SQLException e) {
-			textArea.append("数据插入数据库失败！\n\n");
+			textArea.append(e.getMessage()+"\n\n");
+			e.printStackTrace();
 		}
 	}
 
